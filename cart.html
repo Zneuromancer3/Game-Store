@@ -5,76 +5,165 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game Store - Cart</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  
+  <style>
+    /* Custom Styles for Cart */
+    .bg-pure-black {
+      background-color: #000;
+    }
+
+    .text-yellow {
+      color: #FFD700;
+    }
+
+    .bg-yellow-btn {
+      background-color: #FFD700;
+    }
+
+    .bg-yellow-btn:hover {
+      background-color: #e6c100;
+    }
+    footer a {
+      color: #ffd700;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white">
-  <header class="bg-gray-800 p-4">
+<body class="bg-pure-black text-white">
+
+  <!-- Header -->
+  <header class="navbar fixed w-full p-4 z-20">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Game Store</h1>
+      <!-- Logo -->
+      <h1 class="text-3xl font-bold text-yellow">
+        <i class="fas fa-gamepad"></i> Game Store
+      </h1>
+      <!-- Navigation Links -->
       <nav>
-        <ul class="flex space-x-4">
-          <li><a href="index.html" class="hover:text-gray-400">Home</a></li>
-          <li><a href="store.html" class="hover:text-gray-400">Store</a></li>
-          <li><a href="cart.html" class="hover:text-gray-400">Cart</a></li>
-          <li><a href="about.html" class="hover:text-gray-400">About</a></li>
-          <li><a href="contact.html" class="hover:text-gray-400">Contact</a></li>
+        <ul class="flex space-x-6">
+          <li><a href="index.html" class="hover:text-yellow-300" aria-label="Home"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="store.html" class="hover:text-yellow-300" aria-label="Store"><i class="fas fa-store"></i> Store</a></li>
+          <li><a href="cart.html" class="hover:text-yellow-300" aria-label="Cart"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+          <li><a href="about.html" class="hover:text-yellow-300" aria-label="About"><i class="fas fa-info-circle"></i> About</a></li>
+          <li><a href="contact.html" class="hover:text-yellow-300" aria-label="Contact"><i class="fas fa-envelope"></i> Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
+  <!-- Cart Section -->
   <section class="py-12">
     <div class="container mx-auto">
-      <h2 class="text-3xl font-bold mb-6 text-center">Your Cart</h2>
-      <div class="overflow-x-auto">
+      <h2 class="text-3xl font-bold mt-10 text-center text-yellow">Your Cart</h2>
+      <div class="overflow-x-auto mt-7">
         <table class="table-auto w-full text-left bg-gray-800 rounded">
           <thead>
             <tr class="border-b border-gray-700">
-              <th class="p-4">Game</th>
-              <th class="p-4">Price</th>
-              <th class="p-4">Quantity</th>
-              <th class="p-4">Total</th>
-              <th class="p-4">Actions</th>
+              <th class="p-4 text-yellow">Game</th>
+              <th class="p-4 text-yellow">Price</th>
+              <th class="p-4 text-yellow">Quantity</th>
+              <th class="p-4 text-yellow">Total</th>
+              <th class="p-4 text-yellow">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <tr class="border-b border-gray-700">
-              <td class="p-4">Game Title 1</td>
-              <td class="p-4">$29.99</td>
-              <td class="p-4">
-                <input type="number" min="1" value="1" class="w-16 bg-gray-900 border border-gray-700 text-center text-white rounded">
-              </td>
-              <td class="p-4">$29.99</td>
-              <td class="p-4">
-                <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Remove</button>
-              </td>
-            </tr>
-            <tr>
-              <td class="p-4">Game Title 2</td>
-              <td class="p-4">$49.99</td>
-              <td class="p-4">
-                <input type="number" min="1" value="1" class="w-16 bg-gray-900 border border-gray-700 text-center text-white rounded">
-              </td>
-              <td class="p-4">$49.99</td>
-              <td class="p-4">
-                <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Remove</button>
-              </td>
-            </tr>
+          <tbody id="cart-items">
+            <!-- Cart items will be added here dynamically -->
           </tbody>
         </table>
       </div>
 
       <div class="flex justify-between items-center mt-8 bg-gray-800 p-6 rounded">
-        <h3 class="text-xl font-bold">Total: $79.98</h3>
-        <button class="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600">Checkout</button>
+        <h3 class="text-xl font-bold text-yellow" id="total-price">Total: $0.00</h3>
+        <button class="bg-yellow-btn text-black px-6 py-3 rounded hover:bg-yellow-400">
+          <i class="fas fa-credit-card"></i> Checkout
+        </button>
       </div>
     </div>
   </section>
-
-  <footer class="bg-gray-800 p-4 mt-12">
-    <div class="container mx-auto text-center">
-      <p class="text-gray-400">&copy; 2025 Game Store. All rights reserved.</p>
+ <!-- Footer -->
+ <footer class="py-8 bg-gray-900 text-center mt-16">
+  <div class="container mx-auto">
+    <p class="text-gray-400 mb-4">&copy; 2025 Game Store. All rights reserved.</p>
+    <div class="flex justify-center space-x-6 mb-4">
+      <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">
+        <i class="fab fa-twitter fa-2x"></i>
+      </a>
+      <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">
+        <i class="fab fa-instagram fa-2x"></i>
+      </a>
+      <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">
+        <i class="fab fa-facebook fa-2x"></i>
+      </a>
     </div>
-  </footer>
+    <div class="text-gray-500 text-sm">
+      <p>Follow us on social media for the latest updates and offers!</p>
+    </div>
+  </div>
+</footer>
+
+  <script>
+    // Function to load the cart from localStorage and display it
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartItemsContainer = document.getElementById('cart-items');
+      const totalPriceElement = document.getElementById('total-price');
+      
+      cartItemsContainer.innerHTML = ''; // Clear the table body first
+      let totalPrice = 0;
+
+      cart.forEach((item, index) => {
+        totalPrice += item.price * item.quantity;
+        const row = document.createElement('tr');
+        row.classList.add('border-b', 'border-gray-700');
+        
+        row.innerHTML = `
+          <td class="p-4 flex items-center text-white">
+            <img src="https://via.placeholder.com/50" alt="Game Image" class="w-12 h-12 mr-4 rounded">
+            ${item.name}
+          </td>
+          <td class="p-4">$${item.price.toFixed(2)}</td>
+          <td class="p-4">
+            <input type="number" value="${item.quantity}" min="1" class="w-16 bg-gray-900 border border-gray-700 text-center text-white rounded" onchange="updateQuantity(${index}, this)">
+          </td>
+          <td class="p-4">$${(item.price * item.quantity).toFixed(2)}</td>
+          <td class="p-4">
+            <button onclick="removeItem(${index})" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+              <i class="fas fa-trash-alt"></i> Remove
+            </button>
+          </td>
+        `;
+        
+        cartItemsContainer.appendChild(row);
+      });
+
+      totalPriceElement.textContent = `Total: $${totalPrice.toFixed(2)}`;
+    }
+
+    // Function to update the quantity of an item in the cart
+    function updateQuantity(index, input) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart[index].quantity = parseInt(input.value);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart(); // Re-load the cart with updated data
+    }
+
+    // Function to remove an item from the cart
+    function removeItem(index) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1); // Remove the item at the specified index
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart(); // Re-load the cart after removing the item
+    }
+
+    // Load cart items when the page loads
+    window.onload = loadCart;
+  </script>
+
 </body>
 </html>

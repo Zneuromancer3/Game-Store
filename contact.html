@@ -6,60 +6,143 @@
   <title>Game Store - Contact</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <style>
+    .navbar {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #444;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .navbar a {
+      color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #ffd700;
+    }
+
+    .navbar h1 i {
+      color: #ffd700;
+    }
+
+  </style>
 </head>
-<body class="bg-gray-900 text-white">
-  <!-- Navbar -->
-  <header class="bg-gray-800 p-4">
+<body class="bg-black text-white">
+
+  <header class="navbar fixed w-full p-4 z-20">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Game Store</h1>
+      <!-- Logo -->
+      <h1 class="text-3xl font-bold">
+        <i class="fas fa-gamepad"></i> Game Store
+      </h1>
+      <!-- Navigation Links -->
       <nav>
-        <ul class="flex space-x-4">
-          <li><a href="index.html" class="hover:text-gray-400">Home</a></li>
-          <li><a href="store.html" class="hover:text-gray-400">Store</a></li>
-          <li><a href="cart.html" class="hover:text-gray-400">Cart</a></li>
-          <li><a href="about.html" class="hover:text-gray-400">About</a></li>
-          <li><a href="contact.html" class="hover:text-gray-400">Contact</a></li>
+        <ul class="flex space-x-6">
+          <li><a href="index.html" class="hover:text-yellow-300" aria-label="Home"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="store.html" class="hover:text-yellow-300" aria-label="Store"><i class="fas fa-store"></i> Store</a></li>
+          <li><a href="cart.html" class="hover:text-yellow-300" aria-label="Cart"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+          <li><a href="about.html" class="hover:text-yellow-300" aria-label="About"><i class="fas fa-info-circle"></i> About</a></li>
+          <li><a href="contact.html" class="hover:text-yellow-300" aria-label="Contact"><i class="fas fa-envelope"></i> Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Contact Section -->
   <section class="py-12">
-    <div class="container mx-auto">
-      <h2 class="text-3xl font-bold mb-6 text-center">Contact Us</h2>
-      <p class="text-gray-300 mb-8 text-center">
-        Got questions, feedback, or issues? We'd love to hear from you! Use the form below to get in touch.
-      </p>
-
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      
       <!-- Contact Form -->
-      <div class="bg-gray-800 p-6 rounded max-w-2xl mx-auto">
+      <div class="bg-gray-800 p-6 rounded-lg">
+        <h2 class="text-3xl font-bold mb-6 text-center text-yellow-500">Contact Us</h2>
+        <p class="text-gray-300 mb-8 text-center">
+          Got questions, feedback, or issues? We'd love to hear from you! Use the form below to get in touch.
+        </p>
+  
         <form action="#" method="POST">
-          <div class="mb-4">
+          <div class="mb-4 relative">
             <label for="name" class="block text-sm font-bold mb-2">Your Name</label>
-            <input type="text" id="name" name="name" class="w-full bg-gray-900 text-white border border-gray-700 rounded px-4 py-2" required>
+            <div class="flex items-center bg-gray-900 border border-gray-700 rounded px-4 py-2">
+              <i class="fas fa-user text-yellow-500 mr-2"></i>
+              <input type="text" id="name" name="name" class="w-full bg-transparent text-white border-none" required>
+            </div>
           </div>
-          <div class="mb-4">
+  
+          <div class="mb-4 relative">
             <label for="email" class="block text-sm font-bold mb-2">Your Email</label>
-            <input type="email" id="email" name="email" class="w-full bg-gray-900 text-white border border-gray-700 rounded px-4 py-2" required>
+            <div class="flex items-center bg-gray-900 border border-gray-700 rounded px-4 py-2">
+              <i class="fas fa-envelope text-yellow-500 mr-2"></i>
+              <input type="email" id="email" name="email" class="w-full bg-transparent text-white border-none" required>
+            </div>
           </div>
-          <div class="mb-4">
+  
+          <div class="mb-4 relative">
             <label for="message" class="block text-sm font-bold mb-2">Your Message</label>
-            <textarea id="message" name="message" rows="5" class="w-full bg-gray-900 text-white border border-gray-700 rounded px-4 py-2" required></textarea>
+            <div class="flex items-center bg-gray-900 border border-gray-700 rounded px-4 py-2">
+              <i class="fas fa-comment-dots text-yellow-500 mr-2"></i>
+              <textarea id="message" name="message" rows="5" class="w-full bg-transparent text-white border-none" required></textarea>
+            </div>
           </div>
-          <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600 w-full">
+  
+          <button type="submit" class="bg-yellow-500 text-white px-6 py-3 rounded hover:bg-yellow-600 w-full">
             Send Message
           </button>
         </form>
       </div>
+
+      <!-- Social Links -->
+      <div class="flex flex-col items-center justify-center bg-gray-800 p-6 rounded-lg">
+        <h2 class="text-3xl font-bold mb-6 text-center text-yellow-500">Follow Us</h2>
+        <p class="text-gray-300 mb-8 text-center">
+          Stay connected with us on social media!
+        </p>
+        
+        <div class="flex space-x-6">
+          <a href="https://facebook.com" target="_blank" class="text-yellow-500 hover:text-yellow-600">
+            <i class="fab fa-facebook-square text-3xl"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank" class="text-yellow-500 hover:text-yellow-600">
+            <i class="fab fa-twitter text-3xl"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" class="text-yellow-500 hover:text-yellow-600">
+            <i class="fab fa-instagram text-3xl"></i>
+          </a>
+          <a href="https://linkedin.com" target="_blank" class="text-yellow-500 hover:text-yellow-600">
+            <i class="fab fa-linkedin text-3xl"></i>
+          </a>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 p-4 mt-12">
-    <div class="container mx-auto text-center">
-      <p class="text-gray-400">&copy; 2025 Game Store. All rights reserved.</p>
+ <!-- Footer -->
+ <footer class="py-8 bg-gray-900 text-center">
+  <div class="container mx-auto">
+    <p class="text-gray-400 mb-4">&copy; 2025 Game Store. All rights reserved.</p>
+    <div class="flex justify-center space-x-6 mb-4">
+      <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">
+        <i class="fab fa-twitter fa-2x"></i>
+      </a>
+      <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">
+        <i class="fab fa-instagram fa-2x"></i>
+      </a>
+      <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">
+        <i class="fab fa-facebook fa-2x"></i>
+      </a>
     </div>
-  </footer>
+    <div class="text-gray-500 text-sm">
+      <p>Follow us on social media for the latest updates and offers!</p>
+    </div>
+  </div>
+</footer>
+  <!-- Font Awesome CDN for social media icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -5,55 +5,212 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game Store - About Us</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+  <style>
+    /* Custom Styles */
+    .bg-pure-black {
+      background-color: #000;
+    }
+
+    .text-yellow {
+      color: #FFD700;
+    }
+
+    .text-light {
+      color: #D3D3D3;
+    }
+
+    .hover-yellow:hover {
+      color: #FFD700;
+    }
+
+    .bg-yellow-btn {
+      background-color: #FFD700;
+    }
+
+    .bg-yellow-btn:hover {
+      background-color: #e6c100;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #FFD700;
+    }
+
+    .text-glow {
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.7), 0 0 30px rgba(255, 215, 0, 0.6);
+    }
+
+    .animate-up {
+      animation: slide-up 1s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes slide-up {
+      from {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    .navbar {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #444;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .navbar a {
+      color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #ffd700;
+    }
+
+    .navbar h1 i {
+      color: #ffd700;
+    }
+
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+    }
+
+  </style>
 </head>
-<body class="bg-gray-900 text-white">
+<body class="bg-pure-black text-white font-roboto scroll-smooth">
+
   <!-- Navbar -->
-  <header class="bg-gray-800 p-4">
+  <header class="navbar fixed w-full p-4 z-20">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Game Store</h1>
+      <!-- Logo -->
+      <h1 class="text-3xl font-bold">
+        <i class="fas fa-gamepad"></i> Game Store
+      </h1>
+      <!-- Navigation Links -->
       <nav>
-        <ul class="flex space-x-4">
-          <li><a href="index.html" class="hover:text-gray-400">Home</a></li>
-          <li><a href="store.html" class="hover:text-gray-400">Store</a></li>
-          <li><a href="cart.html" class="hover:text-gray-400">Cart</a></li>
-          <li><a href="about.html" class="hover:text-gray-400">About</a></li>
-          <li><a href="contact.html" class="hover:text-gray-400">Contact</a></li>
+        <ul class="flex space-x-6">
+          <li><a href="index.html" class="hover:text-yellow-300" aria-label="Home"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="store.html" class="hover:text-yellow-300" aria-label="Store"><i class="fas fa-store"></i> Store</a></li>
+          <li><a href="cart.html" class="hover:text-yellow-300" aria-label="Cart"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+          <li><a href="about.html" class="hover:text-yellow-300" aria-label="About"><i class="fas fa-info-circle"></i> About</a></li>
+          <li><a href="contact.html" class="hover:text-yellow-300" aria-label="Contact"><i class="fas fa-envelope"></i> Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <section class="py-12">
-    <div class="container mx-auto">
-      <h2 class="text-3xl font-bold mb-6 text-center">About Us</h2>
-      <p class="text-lg text-gray-300 leading-relaxed mb-6 text-center">
-        Welcome to Game Store, your ultimate destination for discovering, purchasing, and playing the best games in the industry. 
-        We are passionate gamers ourselves, and our mission is to create a seamless and enjoyable shopping experience for gamers worldwide.
-      </p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-gray-800 p-6 rounded">
-          <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
-          <p class="text-gray-300">
-            At Game Store, our mission is to bring together a curated collection of games that cater to every gamer’s taste. 
-            From indie gems to AAA blockbusters, we ensure there’s something for everyone.
-          </p>
-        </div>
-        <div class="bg-gray-800 p-6 rounded">
-          <h3 class="text-2xl font-bold mb-4">Our Vision</h3>
-          <p class="text-gray-300">
-            Our vision is to build a vibrant community of gamers who share their passion for interactive entertainment. 
-            We strive to be the go-to platform for discovering, purchasing, and enjoying your favorite games.
-          </p>
-        </div>
+  <!-- About Us Section -->
+  <section class="py-20 container mx-auto text-center animate-up">
+    <h2 class="section-title mb-6">About Us</h2>
+    <p class="text-lg text-light mb-6">
+      Welcome to Game Store, your ultimate destination for discovering, purchasing, and playing the best games in the industry. 
+      We are passionate gamers ourselves, and our mission is to create a seamless and enjoyable shopping experience for gamers worldwide.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div class="bg-gray-800 p-8 rounded-lg shadow-lg animate-up">
+        <h3 class="text-2xl font-bold text-yellow mb-4 flex items-center">
+          <i class="fas fa-bullseye mr-3"></i> Our Mission
+        </h3>
+        <p class="text-light">
+          At Game Store, our mission is to bring together a curated collection of games that cater to every gamer’s taste. 
+          From indie gems to AAA blockbusters, we ensure there’s something for everyone.
+        </p>
+      </div>
+
+      <div class="bg-gray-800 p-8 rounded-lg shadow-lg animate-up">
+        <h3 class="text-2xl font-bold text-yellow mb-4 flex items-center">
+          <i class="fas fa-eye mr-3"></i> Our Vision
+        </h3>
+        <p class="text-light">
+          Our vision is to build a vibrant community of gamers who share their passion for interactive entertainment. 
+          We strive to be the go-to platform for discovering, purchasing, and enjoying your favorite games.
+        </p>
       </div>
     </div>
   </section>
 
-  <footer class="bg-gray-800 p-4 mt-12">
-    <div class="container mx-auto text-center">
-      <p class="text-gray-400">&copy; 2025 Game Store. All rights reserved.</p>
+ <!-- Store History and Community Section -->
+<section class="py-12 bg-gray-800 text-center">
+  <h3 class="text-3xl font-bold text-yellow mb-6">Our Story and Community</h3>
+  <p class="text-lg text-light mb-6">
+    Game Store was founded by a group of passionate gamers who wanted to bring a seamless and fun gaming experience to players everywhere. 
+    We are more than just an online store—we are a community of gamers who share tips, reviews, and passion for gaming. 
+    Our goal is to create a space where every gamer can find their next adventure.
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <div class="bg-gray-900 p-8 rounded-lg shadow-lg animate-up">
+      <h4 class="text-2xl font-bold text-yellow mb-4">Our History</h4>
+      <p class="text-light">
+        What started as a small gaming platform has quickly grown into one of the leading destinations for gamers. 
+        Our founder, a lifelong gamer, set out with a simple goal: to bring quality games and experiences to players all over the world. 
+        Over the years, Game Store has expanded its offerings, created partnerships, and built a dedicated fanbase that loves what we do.
+      </p>
     </div>
-  </footer>
+
+    <div class="bg-gray-900 p-8 rounded-lg shadow-lg animate-up">
+      <h4 class="text-2xl font-bold text-yellow mb-4">Join Our Community</h4>
+      <p class="text-light">
+        At Game Store, we believe in the power of community. By joining our platform, you’ll not only have access to the best games, but you’ll also be part of an ever-growing group of passionate gamers. 
+        From exclusive events to live streams and giveaways, there’s always something happening at Game Store.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Special Offers Section -->
+<section class="py-12 text-center">
+  <h3 class="text-3xl font-bold text-yellow mb-6">Exclusive Offers Just for You!</h3>
+  <p class="text-lg text-light mb-6">
+    As part of our mission to make gaming affordable and accessible, we regularly offer exclusive deals, discounts, and bundles. 
+    Keep an eye out for our seasonal sales, limited-time offers, and special bundles to get the best gaming deals around!
+  </p>
+
+  <a href="store.html" class="bg-yellow-btn text-black px-8 py-4 rounded hover:bg-yellow-400 flex justify-center items-center mx-auto">
+    <i class="fas fa-tag mr-3"></i> Shop Now and Save Big!
+  </a>
+</section>
+
+ <!-- Footer -->
+ <footer class="py-8 bg-gray-900 text-center">
+  <div class="container mx-auto">
+    <p class="text-gray-400 mb-4">&copy; 2025 Game Store. All rights reserved.</p>
+    <div class="flex justify-center space-x-6 mb-4">
+      <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">
+        <i class="fab fa-twitter fa-2x"></i>
+      </a>
+      <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">
+        <i class="fab fa-instagram fa-2x"></i>
+      </a>
+      <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">
+        <i class="fab fa-facebook fa-2x"></i>
+      </a>
+    </div>
+    <div class="text-gray-500 text-sm">
+      <p>Follow us on social media for the latest updates and offers!</p>
+    </div>
+  </div>
+</footer>
+
+  <!-- Scroll-to-Top Button -->
+  <a href="#" class="fixed bottom-6 right-6 bg-yellow-500 text-white p-3 rounded-full shadow-lg hover:bg-yellow-400">
+    <i class="fas fa-chevron-up"></i>
+  </a>
+
 </body>
 </html>
