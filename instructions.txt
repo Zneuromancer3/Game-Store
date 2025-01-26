@@ -1,0 +1,22 @@
+1. Remove TailwindCSS (for non-tailwind users)
+In each HTML file:
+Delete the <script src="https://cdn.tailwindcss.com"></script> line.
+Remove all TailwindCSS-specific classes from the elements.
+
+3. Create styles.css (for non-tailwind users)
+Create a new file named styles.css in the same directory as your HTML files. Use this file to define all the styling for your project.
+
+4. Add Optional JavaScript in index.js
+If functionality is needed, create an index.js file in the project folder. Link it to the HTML files by adding this line before the closing </body> tag:
+<script src="index.js"></script>
+
+5. Ensure your project looks like this:
+/project-folder
+  |- index.html
+  |- store.html
+  |- about.html
+  |- game-details.html
+  |- cart.html
+  |- contact.html
+  |- styles.css
+  |- index.js

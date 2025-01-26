@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Store - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0f0f0f;
+      color: #f0f0f0;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #444;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .navbar a {
+      color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #ffd700;
+    }
+
+    .navbar h1 i {
+      color: #ffd700;
+    }
+
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+    }
+
+    .card-hover:hover {
+      transform: translateY(-10px) scale(1.05);
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    footer a {
+      color: #ffd700;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+    .animate-slide {
+    animation: slide 20s infinite linear;
+  }
+
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="navbar fixed w-full p-4 z-20">
+    <div class="container mx-auto flex justify-between items-center">
+      <!-- Logo -->
+      <h1 class="text-3xl font-bold">
+        <i class="fas fa-gamepad"></i> Game Store
+      </h1>
+      <!-- Navigation Links -->
+      <nav>
+        <ul class="flex space-x-6">
+          <li><a href="index.html" class="hover:text-yellow-300" aria-label="Home"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="store.html" class="hover:text-yellow-300" aria-label="Store"><i class="fas fa-store"></i> Store</a></li>
+          <li><a href="cart.html" class="hover:text-yellow-300" aria-label="Cart"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+          <li><a href="about.html" class="hover:text-yellow-300" aria-label="About"><i class="fas fa-info-circle"></i> About</a></li>
+          <li><a href="contact.html" class="hover:text-yellow-300" aria-label="Contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative h-screen flex items-center justify-center text-center">
+    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
+      <source src="WhatsApp Video 2025-01-26 at 15.52.40_1c756511.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero-overlay absolute inset-0"></div>
+    <div class="relative z-10">
+      <h2 class="text-5xl font-extrabold mb-4 text-yellow-300" data-aos="fade-up">Welcome to Game Store</h2>
+      <p class="text-lg text-gray-300 mb-6" data-aos="fade-up" data-aos-delay="200">Your ultimate destination for all things gaming.</p>
+      <a href="store.html" class="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black px-8 py-3 rounded-lg hover:opacity-90 transition shadow-lg" data-aos="fade-up" data-aos-delay="400">
+        Browse Games
+      </a>
+    </div>
+  </section>
+
+ <!-- Featured Games -->
+<section class="py-16 bg-black">
+  <div class="container mx-auto px-6">
+    <h3 class="text-4xl font-bold mb-10 text-center text-yellow-400" data-aos="zoom-in">Featured Games</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Game Card 1 -->
+      <div class="relative group bg-gray-900 rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105" data-aos="fade-right">
+        <img src="WhatsApp Image 2025-01-26 at 16.02.20_e0d5ae6f.jpg" alt="Game 1" class="w-full h-48 object-cover rounded-t-lg">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <i class="text-yellow-400 text-5xl fas fa-gamepad mb-4"></i>
+          <h4 class="text-2xl font-bold text-yellow-400 mb-2">Game 1</h4>
+          <p class="text-gray-300 text-center px-4">An epic adventure awaits in this action-packed game.</p>
+        </div>
+      </div>
+
+      <!-- Game Card 2 -->
+      <div class="relative group bg-gray-900 rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105" data-aos="fade-up">
+        <img src="game2.jpg" alt="Game 2" class="w-full h-48 object-cover rounded-t-lg">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <i class="text-yellow-400 text-5xl fas fa-users mb-4"></i>
+          <h4 class="text-2xl font-bold text-yellow-400 mb-2">Game 2</h4>
+          <p class="text-gray-300 text-center px-4">Battle your way to victory in this multiplayer classic.</p>
+        </div>
+      </div>
+
+      <!-- Game Card 3 -->
+      <div class="relative group bg-gray-900 rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105" data-aos="fade-left">
+        <img src="game3.jpg" alt="Game 3" class="w-full h-48 object-cover rounded-t-lg">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <i class="text-yellow-400 text-5xl fas fa-magic mb-4"></i>
+          <h4 class="text-2xl font-bold text-yellow-400 mb-2">Game 3</h4>
+          <p class="text-gray-300 text-center px-4">Step into a fantastical world of mystery and magic.</p>
+        </div>
+      </div>
+
+      <!-- Game Card 4 -->
+      <div class="relative group bg-gray-900 rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105" data-aos="fade-right">
+        <img src="game4.jpg" alt="Game 4" class="w-full h-48 object-cover rounded-t-lg">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <i class="text-yellow-400 text-5xl fas fa-dragon mb-4"></i>
+          <h4 class="text-2xl font-bold text-yellow-400 mb-2">Game 4</h4>
+          <p class="text-gray-300 text-center px-4">Embrace your destiny and conquer the dragon-filled lands.</p>
+        </div>
+      </div>
+
+      <!-- Game Card 5 -->
+      <div class="relative group bg-gray-900 rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105" data-aos="fade-up">
+        <img src="game5.jpg" alt="Game 5" class="w-full h-48 object-cover rounded-t-lg">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <i class="text-yellow-400 text-5xl fas fa-sword mb-4"></i>
+          <h4 class="text-2xl font-bold text-yellow-400 mb-2">Game 5</h4>
+          <p class="text-gray-300 text-center px-4">Prepare for battle in this sword-fighting adventure.</p>
+        </div>
+      </div>
+
+      <!-- Game Card 6 -->
+      <div class="relative group bg-gray-900 rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105" data-aos="fade-left">
+        <img src="game6.jpg" alt="Game 6" class="w-full h-48 object-cover rounded-t-lg">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <i class="text-yellow-400 text-5xl fas fa-robot mb-4"></i>
+          <h4 class="text-2xl font-bold text-yellow-400 mb-2">Game 6</h4>
+          <p class="text-gray-300 text-center px-4">Take on the challenge in a world dominated by robots.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="py-16 bg-black">
+  <div class="container mx-auto px-6">
+    <h3 class="text-4xl font-bold mb-10 text-center text-yellow-400" data-aos="zoom-in">Special Offers</h3>
+    <div class="overflow-hidden relative">
+      <div class="flex space-x-8 animate-slide">
+        <!-- Offer Card 1 -->
+        <div class="relative group bg-gray-900 rounded-lg overflow-hidden shadow-lg w-80 h-56 transform transition-transform duration-300">
+          <img src="offer1.jpg" alt="Offer 1" class="w-full h-32 object-cover rounded-t-lg">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-50"></div>
+          <div class="absolute inset-0 flex flex-col items-center justify-center opacity-100 transition-opacity duration-300">
+            <h4 class="text-2xl font-bold text-yellow-400 mb-2">Exclusive Discount</h4>
+            <p class="text-gray-300 text-center px-4 mb-4">Get 30% off on your first purchase.</p>
+            <button class="bg-yellow-400 text-black font-bold py-2 px-4 rounded-lg hover:bg-yellow-500">Claim Offer</button>
+          </div>
+        </div>
+
+        <!-- Offer Card 2 -->
+        <div class="relative group bg-gray-900 rounded-lg overflow-hidden shadow-lg w-80 h-56 transform transition-transform duration-300">
+          <img src="offer2.jpg" alt="Offer 2" class="w-full h-32 object-cover rounded-t-lg">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-50"></div>
+          <div class="absolute inset-0 flex flex-col items-center justify-center opacity-100 transition-opacity duration-300">
+            <h4 class="text-2xl font-bold text-yellow-400 mb-2">Buy One Get One Free</h4>
+            <p class="text-gray-300 text-center px-4 mb-4">Buy any game and get a second one free.</p>
+            <button class="bg-yellow-400 text-black font-bold py-2 px-4 rounded-lg hover:bg-yellow-500">Claim Offer</button>
+          </div>
+        </div>
+
+        <!-- Offer Card 3 -->
+        <div class="relative group bg-gray-900 rounded-lg overflow-hidden shadow-lg w-80 h-56 transform transition-transform duration-300">
+          <img src="offer3.jpg" alt="Offer 3" class="w-full h-32 object-cover rounded-t-lg">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-50"></div>
+          <div class="absolute inset-0 flex flex-col items-center justify-center opacity-100 transition-opacity duration-300">
+            <h4 class="text-2xl font-bold text-yellow-400 mb-2">Weekend Sale</h4>
+            <p class="text-gray-300 text-center px-4 mb-4">Enjoy up to 50% off this weekend only.</p>
+            <button class="bg-yellow-400 text-black font-bold py-2 px-4 rounded-lg hover:bg-yellow-500">Claim Offer</button>
+          </div>
+        </div>
+
+        <!-- Offer Card 4 -->
+        <div class="relative group bg-gray-900 rounded-lg overflow-hidden shadow-lg w-80 h-56 transform transition-transform duration-300">
+          <img src="offer4.jpg" alt="Offer 4" class="w-full h-32 object-cover rounded-t-lg">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-50"></div>
+          <div class="absolute inset-0 flex flex-col items-center justify-center opacity-100 transition-opacity duration-300">
+            <h4 class="text-2xl font-bold text-yellow-400 mb-2">Early Bird Special</h4>
+            <p class="text-gray-300 text-center px-4 mb-4">Get 20% off by ordering before 10 AM.</p>
+            <button class="bg-yellow-400 text-black font-bold py-2 px-4 rounded-lg hover:bg-yellow-500">Claim Offer</button>
+          </div>
+        </div>
+
+        <!-- Offer Card 5 -->
+        <div class="relative group bg-gray-900 rounded-lg overflow-hidden shadow-lg w-80 h-56 transform transition-transform duration-300">
+          <img src="offer5.jpg" alt="Offer 5" class="w-full h-32 object-cover rounded-t-lg">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-50"></div>
+          <div class="absolute inset-0 flex flex-col items-center justify-center opacity-100 transition-opacity duration-300">
+            <h4 class="text-2xl font-bold text-yellow-400 mb-2">Bundle Deal</h4>
+            <p class="text-gray-300 text-center px-4 mb-4">Get all DLCs with your game purchase.</p>
+            <button class="bg-yellow-400 text-black font-bold py-2 px-4 rounded-lg hover:bg-yellow-500">Claim Offer</button>
+          </div>
+        </div>
+
+        <!-- Offer Card 6 -->
+        <div class="relative group bg-gray-900 rounded-lg overflow-hidden shadow-lg w-80 h-56 transform transition-transform duration-300">
+          <img src="offer6.jpg" alt="Offer 6" class="w-full h-32 object-cover rounded-t-lg">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-50"></div>
+          <div class="absolute inset-0 flex flex-col items-center justify-center opacity-100 transition-opacity duration-300">
+            <h4 class="text-2xl font-bold text-yellow-400 mb-2">VIP Access</h4>
+            <p class="text-gray-300 text-center px-4 mb-4">Get exclusive VIP access to upcoming games.</p>
+            <button class="bg-yellow-400 text-black font-bold py-2 px-4 rounded-lg hover:bg-yellow-500">Claim Offer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Footer -->
+  <footer class="py-6 bg-gray-800 text-center">
+    <div class="container mx-auto">
+      <p class="text-gray-400 mb-2">&copy; 2025 Game Store. All rights reserved.</p>
+      <div class="flex justify-center space-x-4">
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true, // Animation only happens once
+    });
+  </script>
+  
+</body>
+</html>
