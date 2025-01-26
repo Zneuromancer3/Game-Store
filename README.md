@@ -31,7 +31,7 @@ We’ve used built-in HTML icons for better aesthetics and usability. For exampl
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/game-store-website.git
+   git clone https://github.com/Hari-hara7/Game-Store.git
    ```
 2. Navigate to the project directory:
    ```bash
