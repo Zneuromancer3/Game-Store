@@ -36,24 +36,43 @@
 </head>
 <body class="bg-black text-white">
 
-  <header class="navbar fixed w-full p-4 z-20">
+   <!-- Header -->
+   <header class="navbar fixed w-full p-4 z-20 bg-dark-800 text-white">
     <div class="container mx-auto flex justify-between items-center">
       <!-- Logo -->
       <h1 class="text-3xl font-bold">
         <i class="fas fa-gamepad"></i> Game Store
       </h1>
+      <!-- Hamburger Button -->
+      <button 
+        class="lg:hidden text-2xl focus:outline-none" 
+        id="menu-toggle"
+        aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </button>
       <!-- Navigation Links -->
-      <nav>
+      <nav class="hidden lg:flex">
         <ul class="flex space-x-6">
-          <li><a href="index.html" class="hover:text-yellow-300" aria-label="Home"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="store.html" class="hover:text-yellow-300" aria-label="Store"><i class="fas fa-store"></i> Store</a></li>
-          <li><a href="cart.html" class="hover:text-yellow-300" aria-label="Cart"><i class="fas fa-shopping-cart"></i> Cart</a></li>
-          <li><a href="about.html" class="hover:text-yellow-300" aria-label="About"><i class="fas fa-info-circle"></i> About</a></li>
-          <li><a href="contact.html" class="hover:text-yellow-300" aria-label="Contact"><i class="fas fa-envelope"></i> Contact</a></li>
+          <li><a href="index.html" class="hover:text-yellow-300"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="store.html" class="hover:text-yellow-300"><i class="fas fa-store"></i> Store</a></li>
+          <li><a href="cart.html" class="hover:text-yellow-300"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+          <li><a href="about.html" class="hover:text-yellow-300"><i class="fas fa-info-circle"></i> About</a></li>
+          <li><a href="contact.html" class="hover:text-yellow-300"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+      </nav>
+      <!-- Mobile Menu -->
+      <nav id="mobile-menu" class="absolute top-full left-0 w-full bg-gray-900 hidden lg:hidden">
+        <ul class="flex flex-col items-center space-y-4 py-4">
+          <li><a href="index.html" class="hover:text-yellow-300"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="store.html" class="hover:text-yellow-300"><i class="fas fa-store"></i> Store</a></li>
+          <li><a href="cart.html" class="hover:text-yellow-300"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+          <li><a href="about.html" class="hover:text-yellow-300"><i class="fas fa-info-circle"></i> About</a></li>
+          <li><a href="contact.html" class="hover:text-yellow-300"><i class="fas fa-envelope"></i> Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
+
 
   <section class="py-12">
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -144,5 +163,13 @@
 </footer>
   <!-- Font Awesome CDN for social media icons -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+  
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  </script>
 </body>
 </html>
