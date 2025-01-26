@@ -6,59 +6,388 @@
   <title>Game Store - Store</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <style>
+      .navbar {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #444;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .navbar a {
+      color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #ffd700;
+    }
+
+    .navbar h1 i {
+      color: #ffd700;
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white">
-  <header class="bg-gray-800 p-4">
+<body class="bg-black text-white">
+
+  <header class="navbar fixed w-full p-4 z-20">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Game Store</h1>
+      <!-- Logo -->
+      <h1 class="text-3xl font-bold">
+        <i class="fas fa-gamepad"></i> Game Store
+      </h1>
+      <!-- Navigation Links -->
       <nav>
-        <ul class="flex space-x-4">
-          <li><a href="index.html" class="hover:text-gray-400">Home</a></li>
-          <li><a href="store.html" class="hover:text-gray-400">Store</a></li>
-          <li><a href="cart.html" class="hover:text-gray-400">Cart</a></li>
-          <li><a href="about.html" class="hover:text-gray-400">About</a></li>
-          <li><a href="contact.html" class="hover:text-gray-400">Contact</a></li>
+        <ul class="flex space-x-6">
+          <li><a href="index.html" class="hover:text-yellow-300" aria-label="Home"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="store.html" class="hover:text-yellow-300" aria-label="Store"><i class="fas fa-store"></i> Store</a></li>
+          <li><a href="cart.html" class="hover:text-yellow-300" aria-label="Cart"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+          <li><a href="about.html" class="hover:text-yellow-300" aria-label="About"><i class="fas fa-info-circle"></i> About</a></li>
+          <li><a href="contact.html" class="hover:text-yellow-300" aria-label="Contact"><i class="fas fa-envelope"></i> Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <section class="py-12">
-    <div class="container mx-auto">
-      <h2 class="text-3xl font-bold mb-6 text-center">Available Games</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-gray-800 p-4 rounded">
-          <h3 class="text-xl font-bold">Game 1</h3>
-          <p class="text-gray-300 mb-4">Description of Game 1.</p>
-          <p class="text-lg font-bold text-blue-400">$29.99</p>
-          <a href="game-details.html" class="bg-blue-500 text-white px-4 py-2 mt-4 inline-block rounded hover:bg-blue-600">
-            View Details
-          </a>
+ <!-- Game Cards Section -->
+ <section class="py-12 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+  <div class="container mx-auto text-center">
+    <h2 class="text-4xl font-extrabold text-yellow-400 mt-7 mb-10">
+      <i class="fas fa-gamepad"></i> Available Games
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center">
+      
+      <!-- Game Card 1 -->
+      <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">
+        <div class="relative">
+          <img src="u1.jpg" alt="Adventure Quest" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">
+          <span class="absolute top-2 right-2 bg-yellow-400 text-black text-sm px-2 py-1 rounded-full font-bold shadow-md">Trending</span>
         </div>
-        <div class="bg-gray-800 p-4 rounded">
-          <h3 class="text-xl font-bold">Game 2</h3>
-          <p class="text-gray-300 mb-4">Description of Game 2.</p>
-          <p class="text-lg font-bold text-blue-400">$49.99</p>
-          <a href="game-details.html" class="bg-blue-500 text-white px-4 py-2 mt-4 inline-block rounded hover:bg-blue-600">
-            View Details
-          </a>
+        <div class="mt-4">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-2">Adventure Quest</h3>
+          <p class="text-gray-300 mb-4">Embark on a journey filled with challenges and mysteries.</p>
         </div>
-        <div class="bg-gray-800 p-4 rounded">
-          <h3 class="text-xl font-bold">Game 3</h3>
-          <p class="text-gray-300 mb-4">Description of Game 3.</p>
-          <p class="text-lg font-bold text-blue-400">$39.99</p>
-          <a href="game-details.html" class="bg-blue-500 text-white px-4 py-2 mt-4 inline-block rounded hover:bg-blue-600">
-            View Details
+        <div class="flex justify-between items-center">
+          <p class="text-xl font-extrabold text-blue-400">$19.99</p>
+          <a href="game-details.html" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">
+            <i class="fas fa-info-circle mr-2"></i> View Details
           </a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <footer class="bg-gray-800 p-4 mt-12">
+      <!-- Game Card 2 -->
+      <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">
+        <div class="relative">
+          <img src="u2.jpg" alt="Galaxy Warriors" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">
+          <span class="absolute top-2 right-2 bg-yellow-400 text-black text-sm px-2 py-1 rounded-full font-bold shadow-md">New</span>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-2">Galaxy Warriors</h3>
+          <p class="text-gray-300 mb-4">Conquer galaxies in this thrilling space battle game.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="text-xl font-extrabold text-blue-400">$24.99</p>
+          <a href="game-details.html" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">
+            <i class="fas fa-info-circle mr-2"></i> View Details
+          </a>
+        </div>
+      </div>
+
+      <!-- Game Card 3 -->
+      <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">
+        <div class="relative">
+          <img src="u3.jpg" alt="Racing Thrills" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">
+          <span class="absolute top-2 right-2 bg-yellow-400 text-black text-sm px-2 py-1 rounded-full font-bold shadow-md">Hot</span>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-2">Racing Thrills</h3>
+          <p class="text-gray-300 mb-4">Feel the adrenaline in the ultimate racing simulator.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="text-xl font-extrabold text-blue-400">$14.99</p>
+          <a href="game-details.html" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">
+            <i class="fas fa-info-circle mr-2"></i> View Details
+          </a>
+        </div>
+      </div>
+
+      <!-- Game Card 4 -->
+      <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">
+        <div class="relative">
+          <img src="u4.jpg" alt="World Builder" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">
+          <span class="absolute top-2 right-2 bg-yellow-400 text-black text-sm px-2 py-1 rounded-full font-bold shadow-md">Build</span>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-2">World Builder</h3>
+          <p class="text-gray-300 mb-4">Unleash your creativity in this expansive world-building game.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="text-xl font-extrabold text-blue-400">$34.99</p>
+          <a href="game-details.html" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">
+            <i class="fas fa-info-circle mr-2"></i> View Details
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="container mx-auto text-center">
+    <h2 class="text-4xl font-extrabold text-yellow-400 mt-7 mb-10">
+      
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center">
+      
+      <!-- Game Card 1 -->
+      <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">
+        <div class="relative">
+          <img src="u1.jpg" alt="Adventure Quest" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">
+          <span class="absolute top-2 right-2 bg-yellow-400 text-black text-sm px-2 py-1 rounded-full font-bold shadow-md">Trending</span>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-2">Adventure Quest</h3>
+          <p class="text-gray-300 mb-4">Embark on a journey filled with challenges and mysteries.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="text-xl font-extrabold text-blue-400">$19.99</p>
+          <a href="game-details.html" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">
+            <i class="fas fa-info-circle mr-2"></i> View Details
+          </a>
+        </div>
+      </div>
+
+      <!-- Game Card 2 -->
+      <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">
+        <div class="relative">
+          <img src="u2.jpg" alt="Galaxy Warriors" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">
+          <span class="absolute top-2 right-2 bg-yellow-400 text-black text-sm px-2 py-1 rounded-full font-bold shadow-md">New</span>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-2">Galaxy Warriors</h3>
+          <p class="text-gray-300 mb-4">Conquer galaxies in this thrilling space battle game.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="text-xl font-extrabold text-blue-400">$24.99</p>
+          <a href="game-details.html" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">
+            <i class="fas fa-info-circle mr-2"></i> View Details
+          </a>
+        </div>
+      </div>
+
+      <!-- Game Card 3 -->
+      <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">
+        <div class="relative">
+          <img src="u3.jpg" alt="Racing Thrills" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">
+          <span class="absolute top-2 right-2 bg-yellow-400 text-black text-sm px-2 py-1 rounded-full font-bold shadow-md">Hot</span>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-2">Racing Thrills</h3>
+          <p class="text-gray-300 mb-4">Feel the adrenaline in the ultimate racing simulator.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="text-xl font-extrabold text-blue-400">$14.99</p>
+          <a href="game-details.html" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">
+            <i class="fas fa-info-circle mr-2"></i> View Details
+          </a>
+        </div>
+      </div>
+
+      <!-- Game Card 4 -->
+      <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">
+        <div class="relative">
+          <img src="u4.jpg" alt="World Builder" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">
+          <span class="absolute top-2 right-2 bg-yellow-400 text-black text-sm px-2 py-1 rounded-full font-bold shadow-md">Build</span>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-2">World Builder</h3>
+          <p class="text-gray-300 mb-4">Unleash your creativity in this expansive world-building game.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="text-xl font-extrabold text-blue-400">$34.99</p>
+          <a href="game-details.html" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">
+            <i class="fas fa-info-circle mr-2"></i> View Details
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="container mx-auto text-center">
+    <h2 class="text-4xl font-extrabold text-yellow-400 mt-7 mb-10">
+    
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center">
+      
+      <!-- Game Card 1 -->
+      <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">
+        <div class="relative">
+          <img src="u1.jpg" alt="Adventure Quest" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">
+          <span class="absolute top-2 right-2 bg-yellow-400 text-black text-sm px-2 py-1 rounded-full font-bold shadow-md">Trending</span>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-2">Adventure Quest</h3>
+          <p class="text-gray-300 mb-4">Embark on a journey filled with challenges and mysteries.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="text-xl font-extrabold text-blue-400">$19.99</p>
+          <a href="game-details.html" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">
+            <i class="fas fa-info-circle mr-2"></i> View Details
+          </a>
+        </div>
+      </div>
+
+      <!-- Game Card 2 -->
+      <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">
+        <div class="relative">
+          <img src="u2.jpg" alt="Galaxy Warriors" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">
+          <span class="absolute top-2 right-2 bg-yellow-400 text-black text-sm px-2 py-1 rounded-full font-bold shadow-md">New</span>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-2">Galaxy Warriors</h3>
+          <p class="text-gray-300 mb-4">Conquer galaxies in this thrilling space battle game.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="text-xl font-extrabold text-blue-400">$24.99</p>
+          <a href="game-details.html" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">
+            <i class="fas fa-info-circle mr-2"></i> View Details
+          </a>
+        </div>
+      </div>
+
+      <!-- Game Card 3 -->
+      <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">
+        <div class="relative">
+          <img src="u3.jpg" alt="Racing Thrills" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">
+          <span class="absolute top-2 right-2 bg-yellow-400 text-black text-sm px-2 py-1 rounded-full font-bold shadow-md">Hot</span>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-2">Racing Thrills</h3>
+          <p class="text-gray-300 mb-4">Feel the adrenaline in the ultimate racing simulator.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="text-xl font-extrabold text-blue-400">$14.99</p>
+          <a href="game-details.html" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">
+            <i class="fas fa-info-circle mr-2"></i> View Details
+          </a>
+        </div>
+      </div>
+
+      <!-- Game Card 4 -->
+      <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">
+        <div class="relative">
+          <img src="u4.jpg" alt="World Builder" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">
+          <span class="absolute top-2 right-2 bg-yellow-400 text-black text-sm px-2 py-1 rounded-full font-bold shadow-md">Build</span>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-2">World Builder</h3>
+          <p class="text-gray-300 mb-4">Unleash your creativity in this expansive world-building game.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="text-xl font-extrabold text-blue-400">$34.99</p>
+          <a href="game-details.html" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">
+            <i class="fas fa-info-circle mr-2"></i> View Details
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
     <div class="container mx-auto text-center">
-      <p class="text-gray-400">&copy; 2025 Game Store. All rights reserved.</p>
+    <h2 class="text-4xl font-extrabold text-yellow-400 mt-7 mb-10">
+     
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center">
+      
+      <!-- Game Card 1 -->
+      <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">
+        <div class="relative">
+          <img src="u1.jpg" alt="Adventure Quest" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">
+          <span class="absolute top-2 right-2 bg-yellow-400 text-black text-sm px-2 py-1 rounded-full font-bold shadow-md">Trending</span>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-2">Adventure Quest</h3>
+          <p class="text-gray-300 mb-4">Embark on a journey filled with challenges and mysteries.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="text-xl font-extrabold text-blue-400">$19.99</p>
+          <a href="game-details.html" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">
+            <i class="fas fa-info-circle mr-2"></i> View Details
+          </a>
+        </div>
+      </div>
+
+      <!-- Game Card 2 -->
+      <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">
+        <div class="relative">
+          <img src="u2.jpg" alt="Galaxy Warriors" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">
+          <span class="absolute top-2 right-2 bg-yellow-400 text-black text-sm px-2 py-1 rounded-full font-bold shadow-md">New</span>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-2">Galaxy Warriors</h3>
+          <p class="text-gray-300 mb-4">Conquer galaxies in this thrilling space battle game.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="text-xl font-extrabold text-blue-400">$24.99</p>
+          <a href="game-details.html" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">
+            <i class="fas fa-info-circle mr-2"></i> View Details
+          </a>
+        </div>
+      </div>
+
+      <!-- Game Card 3 -->
+      <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">
+        <div class="relative">
+          <img src="u3.jpg" alt="Racing Thrills" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">
+          <span class="absolute top-2 right-2 bg-yellow-400 text-black text-sm px-2 py-1 rounded-full font-bold shadow-md">Hot</span>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-2">Racing Thrills</h3>
+          <p class="text-gray-300 mb-4">Feel the adrenaline in the ultimate racing simulator.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="text-xl font-extrabold text-blue-400">$14.99</p>
+          <a href="game-details.html" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">
+            <i class="fas fa-info-circle mr-2"></i> View Details
+          </a>
+        </div>
+      </div>
+
+      <!-- Game Card 4 -->
+      <div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">
+        <div class="relative">
+          <img src="u4.jpg" alt="World Builder" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">
+          <span class="absolute top-2 right-2 bg-yellow-400 text-black text-sm px-2 py-1 rounded-full font-bold shadow-md">Build</span>
+        </div>
+        <div class="mt-4">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-2">World Builder</h3>
+          <p class="text-gray-300 mb-4">Unleash your creativity in this expansive world-building game.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="text-xl font-extrabold text-blue-400">$34.99</p>
+          <a href="game-details.html" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">
+            <i class="fas fa-info-circle mr-2"></i> View Details
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- Footer Section -->
+  <footer class="bg-black p-6 mt-12">
+    <div class="container mx-auto text-center text-gray-400">
+      <p>&copy; 2025 Game Store. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- FontAwesome Icons (Deferred) -->
+  <script defer src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
