@@ -2,6 +2,10 @@
 
 Welcome to the **Game Store Website**! This project is a modern and responsive web application designed to provide a seamless experience for users to browse and purchase games. The site features multiple pages including Home, Store, Cart, Game Details, About, and Contact, with intuitive navigation and a visually appealing interface.
 
+![Game Store Banner](banner.png)
+
+---
+
 ## 🌟 Features
 
 - **Home Page**: Welcomes users with highlights of featured games and promotions.
@@ -12,11 +16,16 @@ Welcome to the **Game Store Website**! This project is a modern and responsive w
 - **Contact Page**: Enables users to reach out through a contact form or find support information.
 - **Responsive Design**: Fully optimized for desktop, tablet, and mobile devices.
 
+---
+
 ## 🛠️ Technologies Used
 
-- **HTML**: For structuring the content.
-- **TailwindCSS**: For efficient and modern styling.
-- **JavaScript**: To add interactivity and dynamic features.
+### Front-End
+- ![HTML Icon](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white) HTML: For structuring the content.
+- ![TailwindCSS Icon](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white) TailwindCSS: For efficient and modern styling.
+- ![JavaScript Icon](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) JavaScript: To add interactivity and dynamic features.
+
+---
 
 ## 🔗 Built-In Icons
 
@@ -26,6 +35,8 @@ We’ve used built-in HTML icons for better aesthetics and usability. For exampl
 - Cart: 🛍️
 - About: ℹ️
 - Contact: ✉️
+
+---
 
 ## 🚀 How to Run
 
