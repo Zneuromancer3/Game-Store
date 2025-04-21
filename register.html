@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Store - Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f0f0f;
+            color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="navbar fixed w-full p-4 z-20 bg-dark-800 text-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold">
+                <i class="fas fa-gamepad"></i> Game Store
+            </h1>
+            <a href="index.html" class="text-yellow-400 hover:text-yellow-300">
+                <i class="fas fa-home"></i> Back to Home
+            </a>
+        </div>
+    </header>
+
+    <!-- Registration Form -->
+    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8 bg-gray-900 p-8 rounded-xl shadow-2xl">
+            <div>
+                <h2 class="mt-6 text-center text-3xl font-extrabold text-yellow-400">
+                    Create your account
+                </h2>
+            </div>
+            <form class="mt-8 space-y-6" id="registerForm">
+                <div class="rounded-md shadow-sm -space-y-px">
+                    <div>
+                        <label for="email" class="sr-only">Email address</label>
+                        <input id="email" name="email" type="email" required 
+                            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 bg-gray-800 text-white placeholder-gray-400 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm" 
+                            placeholder="Email address">
+                    </div>
+                    <div>
+                        <label for="password" class="sr-only">Password</label>
+                        <input id="password" name="password" type="password" required 
+                            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm" 
+                            placeholder="Password">
+                    </div>
+                    <div>
+                        <label for="confirmPassword" class="sr-only">Confirm Password</label>
+                        <input id="confirmPassword" name="confirmPassword" type="password" required 
+                            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 bg-gray-800 text-white placeholder-gray-400 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm" 
+                            placeholder="Confirm Password">
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" 
+                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+                        Register
+                    </button>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-gray-400">Already have an account? 
+                        <a href="login.html" class="text-yellow-400 hover:text-yellow-300">Sign in</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    
+    <!-- Firebase Config and Auth Logic -->
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA0YRgZSh9RL1AN19DRXVFFayUuEwAUgfI",
+            authDomain: "gamestore-220f3.firebaseapp.com",
+            projectId: "gamestore-220f3",
+            storageBucket: "gamestore-220f3.firebasestorage.app",
+            messagingSenderId: "623697954306",
+            appId: "1:623697954306:web:25954c14bc49bf34bdc91b"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Get form elements
+        const registerForm = document.getElementById('registerForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+
+        // Handle form submission
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            // Create user with email and password
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    console.log('User registered:', user);
+                    // Redirect to home page
+                    window.location.href = 'index.html';
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage);
+                });
+        });
+
+        // Check if user is already logged in
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html> 

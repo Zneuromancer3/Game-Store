@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Store - Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f0f0f;
+            color: #f0f0f0;
+        }
+        .admin-badge {
+            background: linear-gradient(45deg, #ffd700, #ffa500);
+            color: black;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        .cart-item {
+            transition: all 0.3s ease;
+        }
+        .cart-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="navbar fixed w-full p-4 z-20 bg-dark-800 text-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold">
+                <i class="fas fa-gamepad"></i> Game Store
+            </h1>
+            <a href="index.html" class="text-yellow-400 hover:text-yellow-300">
+                <i class="fas fa-home"></i> Back to Home
+            </a>
+        </div>
+    </header>
+
+    <!-- Profile Section -->
+    <div id="profileSection" class="min-h-screen pt-20 pb-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto">
+            <div class="bg-gray-900 rounded-xl shadow-lg p-6">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="h-20 w-20 rounded-full bg-yellow-500 flex items-center justify-center">
+                        <i class="fas fa-user text-3xl text-black"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <h2 class="text-2xl font-bold text-yellow-400" id="userEmail">Loading...</h2>
+                            <span id="adminBadge" class="admin-badge">ADMIN</span>
+                        </div>
+                        <p class="text-gray-400" id="userRole">Administrator Account</p>
+                    </div>
+                </div>
+
+                <!-- Cart Section -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-yellow-400 mb-4">Your Cart</h3>
+                    <div id="cartItems" class="space-y-4">
+                        <!-- Cart items will be dynamically added here -->
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="text-lg font-semibold">Total: $<span id="cartTotal">0.00</span></span>
+                        <button id="checkoutButton" class="px-4 py-2 bg-yellow-500 text-black rounded-lg hover:bg-yellow-600">
+                            Checkout
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Admin Dashboard -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-yellow-400 mb-4">Admin Dashboard</h3>
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-gray-800 p-4 rounded-lg">
+                                <h4 class="text-lg font-semibold text-yellow-400 mb-2">User Management</h4>
+                                <div class="space-y-2">
+                                    <input type="email" id="userEmailInput" placeholder="User Email"
+                                        class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white">
+                                    <button id="grantAdminButton" class="w-full px-4 py-2 bg-yellow-500 text-black rounded-lg hover:bg-yellow-600">
+                                        Grant Admin Access
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bg-gray-800 p-4 rounded-lg">
+                                <h4 class="text-lg font-semibold text-yellow-400 mb-2">Game Management</h4>
+                                <div class="space-y-2">
+                                    <button id="addGameButton" class="w-full px-4 py-2 bg-yellow-500 text-black rounded-lg hover:bg-yellow-600">
+                                        Add New Game
+                                    </button>
+                                    <button id="manageGamesButton" class="w-full px-4 py-2 bg-yellow-500 text-black rounded-lg hover:bg-yellow-600">
+                                        Manage Existing Games
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logout Button -->
+                <div class="mt-8">
+                    <button id="logoutButton" class="w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA0YRgZSh9RL1AN19DRXVFFayUuEwAUgfI",
+            authDomain: "gamestore-220f3.firebaseapp.com",
+            projectId: "gamestore-220f3",
+            storageBucket: "gamestore-220f3.firebasestorage.app",
+            messagingSenderId: "623697954306",
+            appId: "1:623697954306:web:25954c14bc49bf34bdc91b"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Sample cart data (in a real app, this would come from Firestore)
+        const cartItems = [
+            { id: 1, name: 'Red Dead Redemption 2', price: 59.99, image: 'game1.jpg' },
+            { id: 2, name: 'Cyberpunk 2077', price: 49.99, image: 'game2.jpg' }
+        ];
+
+        // Function to update cart display
+        function updateCartDisplay() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            // Clear existing items
+            cartItemsContainer.innerHTML = '';
+            
+            // Calculate total
+            let total = 0;
+            
+            // Add each item to the cart
+            cartItems.forEach(item => {
+                total += item.price;
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item bg-gray-800 p-4 rounded-lg flex items-center space-x-4';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded">
+                    <div class="flex-1">
+                        <h4 class="text-lg font-semibold">${item.name}</h4>
+                        <p class="text-yellow-400">$${item.price.toFixed(2)}</p>
+                    </div>
+                    <button class="remove-item px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600" data-id="${item.id}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+            
+            // Update total
+            cartTotal.textContent = total.toFixed(2);
+        }
+
+        // Check authentication state
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // Update profile information
+                document.getElementById('userEmail').textContent = user.email;
+                
+                // Update cart display
+                updateCartDisplay();
+            } else {
+                // Redirect to home page if not logged in
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Logout functionality
+        document.getElementById('logoutButton').addEventListener('click', () => {
+            firebase.auth().signOut().then(() => {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'index.html';
+            });
+        });
+
+        // Admin functionality
+        document.getElementById('grantAdminButton').addEventListener('click', () => {
+            const userEmail = document.getElementById('userEmailInput').value;
+            if (userEmail) {
+                // In a real app, this would update the user's admin status in Firestore
+                alert(`Admin access granted to ${userEmail}`);
+                document.getElementById('userEmailInput').value = '';
+            } else {
+                alert('Please enter a user email');
+            }
+        });
+
+        document.getElementById('addGameButton').addEventListener('click', () => {
+            // In a real app, this would open a form to add a new game
+            alert('Add Game functionality will be implemented here');
+        });
+
+        document.getElementById('manageGamesButton').addEventListener('click', () => {
+            // In a real app, this would show a list of games to manage
+            alert('Manage Games functionality will be implemented here');
+        });
+
+        // Checkout functionality
+        document.getElementById('checkoutButton').addEventListener('click', () => {
+            if (cartItems.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            // In a real app, this would process the payment
+            alert('Checkout functionality will be implemented here');
+        });
+
+        // Remove item from cart
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.remove-item')) {
+                const itemId = parseInt(e.target.closest('.remove-item').dataset.id);
+                const index = cartItems.findIndex(item => item.id === itemId);
+                if (index !== -1) {
+                    cartItems.splice(index, 1);
+                    updateCartDisplay();
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

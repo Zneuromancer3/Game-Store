@@ -112,6 +112,7 @@
           <li><a href="cart.html" class="hover:text-yellow-300"><i class="fas fa-shopping-cart"></i> Cart</a></li>
           <li><a href="about.html" class="hover:text-yellow-300"><i class="fas fa-info-circle"></i> About</a></li>
           <li><a href="contact.html" class="hover:text-yellow-300"><i class="fas fa-envelope"></i> Contact</a></li>
+          <li id="authButton"><a href="login.html" class="hover:text-yellow-300"><i class="fas fa-user"></i> Login</a></li>
         </ul>
       </nav>
       <!-- Mobile Menu -->
@@ -122,6 +123,7 @@
           <li><a href="cart.html" class="hover:text-yellow-300"><i class="fas fa-shopping-cart"></i> Cart</a></li>
           <li><a href="about.html" class="hover:text-yellow-300"><i class="fas fa-info-circle"></i> About</a></li>
           <li><a href="contact.html" class="hover:text-yellow-300"><i class="fas fa-envelope"></i> Contact</a></li>
+          <li id="mobileAuthButton"><a href="login.html" class="hover:text-yellow-300"><i class="fas fa-user"></i> Login</a></li>
         </ul>
       </nav>
     </div>
@@ -418,7 +420,185 @@
 
   <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
   <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyA0YRgZSh9RL1AN19DRXVFFayUuEwAUgfI",
+      authDomain: "gamestore-220f3.firebaseapp.com",
+      projectId: "gamestore-220f3",
+      storageBucket: "gamestore-220f3.firebasestorage.app",
+      messagingSenderId: "623697954306",
+      appId: "1:623697954306:web:25954c14bc49bf34bdc91b"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const ADMIN_CODE = 'ADMIN123'; // Admin access code
+
+    function checkAuth() {
+      const authButton = document.getElementById('authButton');
+      const mobileAuthButton = document.getElementById('mobileAuthButton');
+      const currentUser = localStorage.getItem('currentUser');
+      
+      if (currentUser) {
+        const userData = JSON.parse(currentUser);
+        // User is signed in
+        authButton.innerHTML = `
+          <div class="relative">
+            <button id="profileDropdownButton" class="flex items-center space-x-2 hover:text-yellow-300">
+              <i class="fas fa-user"></i>
+              <span>${userData.email}</span>
+              ${userData.isAdmin ? '<span class="admin-badge">ADMIN</span>' : ''}
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-gray-900 rounded-lg shadow-lg hidden">
+              <a href="profile.html" class="block px-4 py-2 hover:bg-gray-800">Profile</a>
+              <a href="#" id="logoutButton" class="block px-4 py-2 hover:bg-gray-800">Logout</a>
+            </div>
+          </div>
+        `;
+        mobileAuthButton.innerHTML = `
+          <div class="flex flex-col space-y-2">
+            <a href="profile.html" class="hover:text-yellow-300">
+              <i class="fas fa-user"></i> Profile
+            </a>
+            <a href="#" id="mobileLogoutButton" class="hover:text-yellow-300">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+          </div>
+        `;
+        
+        // Add logout functionality
+        document.getElementById('logoutButton').addEventListener('click', () => {
+          firebase.auth().signOut();
+          localStorage.removeItem('currentUser');
+          checkAuth();
+        });
+        document.getElementById('mobileLogoutButton').addEventListener('click', () => {
+          firebase.auth().signOut();
+          localStorage.removeItem('currentUser');
+          checkAuth();
+        });
+
+        // Add click functionality for profile dropdown
+        const profileDropdownButton = document.getElementById('profileDropdownButton');
+        const profileDropdown = document.getElementById('profileDropdown');
+        
+        profileDropdownButton.addEventListener('click', () => {
+          profileDropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+          if (!profileDropdownButton.contains(event.target) && !profileDropdown.contains(event.target)) {
+            profileDropdown.classList.add('hidden');
+          }
+        });
+      } else {
+        // User is signed out
+        authButton.innerHTML = `
+          <div class="relative">
+            <button id="loginButton" class="flex items-center space-x-2 hover:text-yellow-300">
+              <i class="fas fa-user"></i>
+              <span>Login</span>
+            </button>
+            <div id="loginDropdown" class="absolute right-0 mt-2 w-64 bg-gray-900 rounded-lg shadow-lg hidden p-4">
+              <div class="space-y-3">
+                <input type="email" id="email" placeholder="Email" class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white mb-2">
+                <input type="password" id="password" placeholder="Password" class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white mb-2">
+                <input type="text" id="adminCode" placeholder="Admin Code (Optional)" class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white mb-2">
+                <button id="submitLogin" class="w-full px-4 py-2 bg-yellow-500 text-black rounded-lg hover:bg-yellow-600">
+                  Login
+                </button>
+                <p class="text-sm text-gray-400 text-center">Don't have an account? <a href="#" id="showRegister" class="text-yellow-400 hover:text-yellow-300">Register</a></p>
+              </div>
+            </div>
+          </div>
+        `;
+        mobileAuthButton.innerHTML = `
+          <div class="flex flex-col space-y-2">
+            <input type="email" id="mobileEmail" placeholder="Email" class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white mb-2">
+            <input type="password" id="mobilePassword" placeholder="Password" class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white mb-2">
+            <input type="text" id="mobileAdminCode" placeholder="Admin Code (Optional)" class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white mb-2">
+            <button id="mobileSubmitLogin" class="w-full px-4 py-2 bg-yellow-500 text-black rounded-lg hover:bg-yellow-600">
+              Login
+            </button>
+            <p class="text-sm text-gray-400 text-center">Don't have an account? <a href="#" id="mobileShowRegister" class="text-yellow-400 hover:text-yellow-300">Register</a></p>
+          </div>
+        `;
+
+        // Add login functionality
+        document.getElementById('loginButton').addEventListener('click', () => {
+          document.getElementById('loginDropdown').classList.toggle('hidden');
+        });
+
+        // Login handlers
+        document.getElementById('submitLogin').addEventListener('click', () => {
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
+          const adminCode = document.getElementById('adminCode').value;
+          handleFirebaseLogin(email, password, adminCode);
+        });
+
+        document.getElementById('mobileSubmitLogin').addEventListener('click', () => {
+          const email = document.getElementById('mobileEmail').value;
+          const password = document.getElementById('mobilePassword').value;
+          const adminCode = document.getElementById('mobileAdminCode').value;
+          handleFirebaseLogin(email, password, adminCode);
+        });
+
+        // Close login dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+          const loginButton = document.getElementById('loginButton');
+          const loginDropdown = document.getElementById('loginDropdown');
+          if (loginButton && loginDropdown && !loginButton.contains(event.target) && !loginDropdown.contains(event.target)) {
+            loginDropdown.classList.add('hidden');
+          }
+        });
+      }
+    }
+
+    function handleFirebaseLogin(email, password, adminCode) {
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          const isAdmin = adminCode === ADMIN_CODE;
+          localStorage.setItem('currentUser', JSON.stringify({
+            email: user.email,
+            uid: user.uid,
+            isAdmin: isAdmin
+          }));
+          checkAuth();
+        })
+        .catch((error) => {
+          alert('Error signing in: ' + error.message);
+        });
+    }
+
+    // Firebase auth state listener
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        const currentUser = localStorage.getItem('currentUser');
+        const userData = currentUser ? JSON.parse(currentUser) : {};
+        localStorage.setItem('currentUser', JSON.stringify({
+          email: user.email,
+          uid: user.uid,
+          isAdmin: userData.isAdmin || false
+        }));
+      } else {
+        localStorage.removeItem('currentUser');
+      }
+      checkAuth();
+    });
+
+    // Initial auth check
+    checkAuth();
+
     AOS.init({
       duration: 1000,
       once: true,
@@ -436,7 +616,7 @@
   <script>
     AOS.init({
       duration: 1000,
-      once: true, // Animation only happens once
+      once: true,
     });
   </script>
   
