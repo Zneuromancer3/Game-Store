@@ -180,5 +180,23 @@
       mobileMenu.classList.toggle("hidden");
     });
   </script>
+  <script>
+    firebase.auth().onAuthStateChanged((user) => {
+      const authButton = document.getElementById('authButton');
+      if (user) {
+        authButton.innerHTML = `<a href='profile.html' class='hover:text-yellow-300'><i class='fas fa-user'></i> Profile</a>`;
+      } else {
+        authButton.innerHTML = `<a href='login.html' class='hover:text-yellow-300'><i class='fas fa-user'></i> Login</a>`;
+      }
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const authButton = document.getElementById('authButton');
+      if (authButton) {
+        authButton.remove();
+      }
+    });
+  </script>
 </body>
 </html>

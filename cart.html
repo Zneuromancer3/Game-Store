@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport"="width=device-width, initial-scale=1.0">
   <title>Game Store - Cart</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -16,6 +16,22 @@
   gtag('js', new Date());
 
   gtag('config', 'G-RB7WXMKPL3');
+</script>
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+<script>
+  // Initialize Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyA0YRgZSh9RL1AN19DRXVFFayUuEwAUgfI",
+    authDomain: "gamestore-220f3.firebaseapp.com",
+    projectId: "gamestore-220f3",
+    storageBucket: "gamestore-220f3.firebasestorage.app",
+    messagingSenderId: "623697954306",
+    appId: "1:623697954306:web:25954c14bc49bf34bdc91b"
+  };
+
+  firebase.initializeApp(firebaseConfig);
 </script>
   
   <style>
@@ -152,7 +168,7 @@
         
         row.innerHTML = `
           <td class="p-4 flex items-center text-white">
-            <img src="https://via.placeholder.com/50" alt="Game Image" class="w-12 h-12 mr-4 rounded">
+            <img src="${item.image}" alt="${item.name}" class="w-12 h-12 mr-4 rounded">
             ${item.name}
           </td>
           <td class="p-4">$${item.price.toFixed(2)}</td>
@@ -199,6 +215,25 @@
     });
   </script>
 
+  <script>
+    firebase.auth().onAuthStateChanged((user) => {
+      const authButton = document.getElementById('authButton');
+      if (user) {
+        authButton.innerHTML = `<a href='profile.html' class='hover:text-yellow-300'><i class='fas fa-user'></i> Profile</a>`;
+      } else {
+        authButton.innerHTML = `<a href='login.html' class='hover:text-yellow-300'><i class='fas fa-user'></i> Login</a>`;
+      }
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const authButton = document.getElementById('authButton');
+      if (authButton) {
+        authButton.remove();
+      }
+    });
+  </script>
 
 </body>
 </html>
