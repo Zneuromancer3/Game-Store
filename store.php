@@ -3,22 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game Store - Contact</title>
+  <title>Game Store - Store</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RB7WXMKPL3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-RB7WXMKPL3');
-</script>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
   <style>
-    .navbar {
+      .navbar {
       background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid #444;
@@ -40,13 +31,11 @@
     .navbar h1 i {
       color: #ffd700;
     }
-
   </style>
 </head>
 <body class="bg-black text-white">
 
-   <!-- Header -->
-   <header class="navbar fixed w-full p-4 z-20 bg-dark-800 text-white">
+  <header class="navbar fixed w-full p-4 z-20 bg-dark-800 text-white">
     <div class="container mx-auto flex justify-between items-center">
       <!-- Logo -->
       <h1 class="text-3xl font-bold">
@@ -83,73 +72,57 @@
     </div>
   </header>
 
-
-  <section class="py-12">
-    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+ <!-- Game Cards Section -->
+ <section class="py-12 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+  <div class="container mx-auto text-center">
+    <h2 class="text-4xl font-extrabold text-yellow-400 mt-7 mb-10">
+      <i class="fas fa-gamepad"></i> Available Games
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center">
       
-      <!-- Contact Form -->
-      <div class="bg-gray-800 p-6 rounded-lg">
-        <h2 class="text-3xl font-bold mb-6 text-center text-yellow-500">Contact Us</h2>
-        <p class="text-gray-300 mb-8 text-center">
-          Got questions, feedback, or issues? We'd love to hear from you! Use the form below to get in touch.
-        </p>
-  
-        <form action="#" method="POST">
-          <div class="mb-4 relative">
-            <label for="name" class="block text-sm font-bold mb-2">Your Name</label>
-            <div class="flex items-center bg-gray-900 border border-gray-700 rounded px-4 py-2">
-              <i class="fas fa-user text-yellow-500 mr-2"></i>
-              <input type="text" id="name" name="name" class="w-full bg-transparent text-white border-none" required>
-            </div>
-          </div>
-  
-          <div class="mb-4 relative">
-            <label for="email" class="block text-sm font-bold mb-2">Your Email</label>
-            <div class="flex items-center bg-gray-900 border border-gray-700 rounded px-4 py-2">
-              <i class="fas fa-envelope text-yellow-500 mr-2"></i>
-              <input type="email" id="email" name="email" class="w-full bg-transparent text-white border-none" required>
-            </div>
-          </div>
-  
-          <div class="mb-4 relative">
-            <label for="message" class="block text-sm font-bold mb-2">Your Message</label>
-            <div class="flex items-center bg-gray-900 border border-gray-700 rounded px-4 py-2">
-              <i class="fas fa-comment-dots text-yellow-500 mr-2"></i>
-              <textarea id="message" name="message" rows="5" class="w-full bg-transparent text-white border-none" required></textarea>
-            </div>
-          </div>
-  
-          <button type="submit" class="bg-yellow-500 text-white px-6 py-3 rounded hover:bg-yellow-600 w-full">
-            Send Message
-          </button>
-        </form>
-      </div>
+      <?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "game_store";
 
-      <!-- Social Links -->
-      <div class="flex flex-col items-center justify-center bg-gray-800 p-6 rounded-lg">
-        <h2 class="text-3xl font-bold mb-6 text-center text-yellow-500">Follow Us</h2>
-        <p class="text-gray-300 mb-8 text-center">
-          Stay connected with us on social media!
-        </p>
-        
-        <div class="flex space-x-6">
-          <a href="https://facebook.com" target="_blank" class="text-yellow-500 hover:text-yellow-600">
-            <i class="fab fa-facebook-square text-3xl"></i>
-          </a>
-          <a href="https://twitter.com" target="_blank" class="text-yellow-500 hover:text-yellow-600">
-            <i class="fab fa-twitter text-3xl"></i>
-          </a>
-          <a href="https://instagram.com" target="_blank" class="text-yellow-500 hover:text-yellow-600">
-            <i class="fab fa-instagram text-3xl"></i>
-          </a>
-          <a href="https://linkedin.com" target="_blank" class="text-yellow-500 hover:text-yellow-600">
-            <i class="fab fa-linkedin text-3xl"></i>
-          </a>
-        </div>
-      </div>
+$conn = new mysqli($servername, $username, $password, $dbname);
 
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT * FROM games";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo '<div class="bg-gray-800 p-6 rounded-2xl border border-yellow-400 shadow-lg hover:shadow-2xl transition transform hover:scale-105 relative overflow-hidden group">';
+        echo '<div class="relative">';
+        echo '<img src="' . $row['image_url'] . '" alt="' . $row['name'] . '" class="rounded-2xl w-full h-40 object-cover transition duration-300 transform group-hover:scale-110">';
+        echo '</div>';
+        echo '<div class="mt-4">';
+        echo '<h3 class="text-2xl font-bold text-yellow-400 mb-2">' . $row['name'] . '</h3>';
+        echo '<p class="text-gray-300 mb-4">' . $row['description'] . '</p>';
+        echo '</div>';
+        echo '<div class="flex justify-between items-center">';
+        echo '<p class="text-xl font-extrabold text-blue-400">$' . number_format($row['price'], 2) . '</p>';
+        echo '<button onclick="addToCart(' . $row['id'] . ', \'' . addslashes($row['name']) . '\', ' . number_format($row['price'], 2, '.', '') . ')" class="flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium transition transform hover:bg-yellow-500 hover:scale-110">';
+        echo '<i class="fas fa-cart-plus mr-2"></i> Add to Cart';
+        echo '</button>';
+        echo '</div>';
+        echo '</div>';
+    }
+} else {
+    echo '<p class="text-gray-400">No games available at the moment.</p>';
+}
+
+$conn->close();
+?>
     </div>
-  </section>
+  </div>
+</section>
+
 
  <!-- Footer -->
  <footer class="py-8 bg-gray-900 text-center">
@@ -171,8 +144,8 @@
     </div>
   </div>
 </footer>
-  <!-- Font Awesome CDN for social media icons -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <!-- FontAwesome Icons (Deferred) -->
+  <script defer src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <script>
     const menuToggle = document.getElementById("menu-toggle");
     const mobileMenu = document.getElementById("mobile-menu");
@@ -180,29 +153,38 @@
     menuToggle.addEventListener("click", () => {
       mobileMenu.classList.toggle("hidden");
     });
-  </script>
-  <script>
-    firebase.auth().onAuthStateChanged((user) => {
-      const authButton = document.getElementById('authButton');
-      if (user) {
-        authButton.innerHTML = `<a href='profile.html' class='hover:text-yellow-300'><i class='fas fa-user'></i> Profile</a>`;
-      } else {
-        authButton.innerHTML = `<a href='login.html' class='hover:text-yellow-300'><i class='fas fa-user'></i> Login</a>`;
-      }
-    });
-  </script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const authButton = document.getElementById('authButton');
-      if (authButton) {
-        authButton.remove();
-      }
-    });
-  </script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+
+    function addToCart(gameId, gameName, gamePrice) {
       const currentUser = localStorage.getItem('currentUser');
+
+      if (!currentUser) {
+        alert('You need to log in to add items to the cart.');
+        return;
+      }
+
+      const userData = JSON.parse(currentUser);
+      const userId = userData.id;
+
+      // Retrieve the cart from localStorage or initialize it
+      let cart = JSON.parse(localStorage.getItem(`cart_${userId}`)) || {};
+
+      // Add the game to the cart or update its quantity
+      if (cart[gameId]) {
+        cart[gameId].quantity += 1;
+      } else {
+        cart[gameId] = { gameId: gameId, gameName: gameName, price: parseFloat(gamePrice), quantity: 1 };
+      }
+
+      // Save the updated cart back to localStorage
+      localStorage.setItem(`cart_${userId}`, JSON.stringify(cart));
+
+      alert(`${gameName} added to cart successfully!`);
+    }
+
+    // SQL-based authentication logic
+    function checkAuth() {
       const authButton = document.getElementById('authButton');
+      const currentUser = localStorage.getItem('currentUser');
 
       if (currentUser) {
         const userData = JSON.parse(currentUser);
@@ -216,17 +198,48 @@
         `;
       } else {
         authButton.innerHTML = `
-          <a href="login.html" class="hover:text-yellow-300">
+          <a href="login.php" class="hover:text-yellow-300">
             <i class="fas fa-user"></i> Login
           </a>
         `;
       }
-    });
+    }
 
     function logout() {
       localStorage.removeItem('currentUser');
-      location.reload();
+      checkAuth();
     }
+
+    checkAuth();
   </script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const currentUser = localStorage.getItem('currentUser');
+    const authButton = document.getElementById('authButton');
+
+    if (currentUser) {
+      const userData = JSON.parse(currentUser);
+      authButton.innerHTML = `
+        <a href="profile.html" class="hover:text-yellow-300">
+          <i class="fas fa-user"></i> ${userData.username}
+        </a>
+        <a href="#" onclick="logout()" class="hover:text-yellow-300">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      `;
+    } else {
+      authButton.innerHTML = `
+        <a href="login.html" class="hover:text-yellow-300">
+          <i class="fas fa-user"></i> Login
+        </a>
+      `;
+    }
+  });
+
+  function logout() {
+    localStorage.removeItem('currentUser');
+    location.reload();
+  }
+</script>
 </body>
 </html>

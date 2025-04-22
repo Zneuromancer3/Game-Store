@@ -35,13 +35,13 @@
                     Sign in to your account
                 </h2>
             </div>
-            <form class="mt-8 space-y-6" id="loginForm">
+            <form class="mt-8 space-y-6" id="loginForm" method="POST" action="validate_login.php">
                 <div class="rounded-md shadow-sm -space-y-px">
                     <div>
-                        <label for="email" class="sr-only">Email address</label>
-                        <input id="email" name="email" type="email" required 
+                        <label for="username" class="sr-only">Username</label>
+                        <input id="username" name="username" type="text" required 
                             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 bg-gray-800 text-white placeholder-gray-400 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm" 
-                            placeholder="Email address">
+                            placeholder="Username">
                     </div>
                     <div>
                         <label for="password" class="sr-only">Password</label>
@@ -67,68 +67,35 @@
         </div>
     </div>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
-    
-    <!-- Firebase Config and Auth Logic -->
+    <!-- Removed Firebase SDK and auth logic -->
     <script>
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyA0YRgZSh9RL1AN19DRXVFFayUuEwAUgfI",
-            authDomain: "gamestore-220f3.firebaseapp.com",
-            projectId: "gamestore-220f3",
-            storageBucket: "gamestore-220f3.firebasestorage.app",
-            messagingSenderId: "623697954306",
-            appId: "1:623697954306:web:25954c14bc49bf34bdc91b"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-
-        // Get form elements
-        const loginForm = document.getElementById('loginForm');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-
-        // Handle form submission
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const email = emailInput.value;
-            const password = passwordInput.value;
-
-            // Sign in with email and password
-            firebase.auth().signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // Signed in
-                    const user = userCredential.user;
-                    console.log('User signed in:', user);
-                    // Redirect to home page or dashboard
-                    window.location.href = 'index.html';
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    alert(errorMessage);
-                });
-        });
-
-        // Check if user is already logged in
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                // User is signed in
-                window.location.href = 'index.html';
-            }
-        });
+      function loginUser(username, password) {
+        if (username === 'admin') {
+            localStorage.setItem('currentUser', JSON.stringify({ username: 'Admin', isAdmin: true }));
+            window.location.href = 'profile.html';
+        } else {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'validate_login.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                if (xhr.status === 200 && xhr.responseText === 'success') {
+                    localStorage.setItem('currentUser', JSON.stringify({ username, isAdmin: false }));
+                    window.location.href = 'profile.html';
+                } else {
+                    alert('Invalid username or password');
+                }
+            };
+            xhr.send(`username=${username}&password=${password}`);
+        }
+      }
     </script>
 
     <script>
       document.getElementById('loginForm').addEventListener('submit', (e) => {
         e.preventDefault();
-        const email = document.getElementById('email').value;
+        const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
-        handleLogin(email, password);
+        loginUser(username, password);
       });
     </script>
 </body>

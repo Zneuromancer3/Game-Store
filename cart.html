@@ -5,235 +5,231 @@
   <meta name="viewport"="width=device-width, initial-scale=1.0">
   <title>Game Store - Cart</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RB7WXMKPL3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-RB7WXMKPL3');
-</script>
-<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
-<script>
-  // Initialize Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyA0YRgZSh9RL1AN19DRXVFFayUuEwAUgfI",
-    authDomain: "gamestore-220f3.firebaseapp.com",
-    projectId: "gamestore-220f3",
-    storageBucket: "gamestore-220f3.firebasestorage.app",
-    messagingSenderId: "623697954306",
-    appId: "1:623697954306:web:25954c14bc49bf34bdc91b"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-</script>
-  
   <style>
-    /* Custom Styles for Cart */
-    .bg-pure-black {
-      background-color: #000;
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0f0f0f;
+      color: #f0f0f0;
+      overflow-x: hidden;
     }
-
-    .text-yellow {
-      color: #FFD700;
+    .navbar {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #444;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     }
-
-    .bg-yellow-btn {
-      background-color: #FFD700;
+    .navbar a {
+      color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s;
     }
-
-    .bg-yellow-btn:hover {
-      background-color: #e6c100;
-    }
-    footer a {
+    .navbar a:hover {
       color: #ffd700;
     }
-
-    footer a:hover {
-      text-decoration: underline;
+    .navbar h1 i {
+      color: #ffd700;
     }
   </style>
 </head>
-<body class="bg-pure-black text-white">
-
-  <!-- Header -->
+<body>
   <!-- Header -->
   <header class="navbar fixed w-full p-4 z-20 bg-dark-800 text-white">
     <div class="container mx-auto flex justify-between items-center">
-      <!-- Logo -->
       <h1 class="text-3xl font-bold">
         <i class="fas fa-gamepad"></i> Game Store
       </h1>
-      <!-- Hamburger Button -->
-      <button 
-        class="lg:hidden text-2xl focus:outline-none" 
-        id="menu-toggle"
-        aria-label="Toggle menu">
-        <i class="fas fa-bars"></i>
-      </button>
-      <!-- Navigation Links -->
       <nav class="hidden lg:flex">
         <ul class="flex space-x-6">
           <li><a href="index.html" class="hover:text-yellow-300"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="store.html" class="hover:text-yellow-300"><i class="fas fa-store"></i> Store</a></li>
+          <li><a href="store.php" class="hover:text-yellow-300"><i class="fas fa-store"></i> Store</a></li>
           <li><a href="cart.html" class="hover:text-yellow-300"><i class="fas fa-shopping-cart"></i> Cart</a></li>
           <li><a href="about.html" class="hover:text-yellow-300"><i class="fas fa-info-circle"></i> About</a></li>
           <li><a href="contact.html" class="hover:text-yellow-300"><i class="fas fa-envelope"></i> Contact</a></li>
-        </ul>
-      </nav>
-      <!-- Mobile Menu -->
-      <nav id="mobile-menu" class="absolute top-full left-0 w-full bg-gray-900 hidden lg:hidden">
-        <ul class="flex flex-col items-center space-y-4 py-4">
-          <li><a href="index.html" class="hover:text-yellow-300"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="store.html" class="hover:text-yellow-300"><i class="fas fa-store"></i> Store</a></li>
-          <li><a href="cart.html" class="hover:text-yellow-300"><i class="fas fa-shopping-cart"></i> Cart</a></li>
-          <li><a href="about.html" class="hover:text-yellow-300"><i class="fas fa-info-circle"></i> About</a></li>
-          <li><a href="contact.html" class="hover:text-yellow-300"><i class="fas fa-envelope"></i> Contact</a></li>
+          <li id="authButton"></li>
         </ul>
       </nav>
     </div>
   </header>
 
-
-  <!-- Cart Section -->
-  <section class="py-12">
-    <div class="container mx-auto">
-      <h2 class="text-3xl font-bold mt-10 text-center text-yellow">Your Cart</h2>
-      <div class="overflow-x-auto mt-7">
-        <table class="table-auto w-full text-left bg-gray-800 rounded">
-          <thead>
-            <tr class="border-b border-gray-700">
-              <th class="p-4 text-yellow">Game</th>
-              <th class="p-4 text-yellow">Price</th>
-              <th class="p-4 text-yellow">Quantity</th>
-              <th class="p-4 text-yellow">Total</th>
-              <th class="p-4 text-yellow">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="cart-items">
-            <!-- Cart items will be added here dynamically -->
-          </tbody>
-        </table>
+  <!-- Cart Content -->
+  <section class="py-12 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+    <div class="container mx-auto text-center">
+      <h2 class="text-4xl font-extrabold text-yellow-400 mt-7 mb-10">
+        <i class="fas fa-shopping-cart"></i> Your Cart
+      </h2>
+      <div id="cartItems" class="space-y-4">
+        <!-- Cart items will be dynamically inserted here -->
       </div>
-
-      <div class="flex justify-between items-center mt-8 bg-gray-800 p-6 rounded">
-        <h3 class="text-xl font-bold text-yellow" id="total-price">Total: $0.00</h3>
-        <button class="bg-yellow-btn text-black px-6 py-3 rounded hover:bg-yellow-400">
-          <i class="fas fa-credit-card"></i> Checkout
+      <p id="emptyCartMessage" class="text-gray-400 mt-4 hidden">Your cart is empty.</p>
+      <div class="text-center mt-8">
+        <button id="checkoutButton" class="bg-yellow-400 text-black px-6 py-3 rounded-full font-bold text-lg hover:bg-yellow-500 transition transform hover:scale-105">
+          Checkout
         </button>
       </div>
     </div>
   </section>
- <!-- Footer -->
- <footer class="py-8 bg-gray-900 text-center mt-16">
-  <div class="container mx-auto">
-    <p class="text-gray-400 mb-4">&copy; 2025 Game Store. All rights reserved.</p>
-    <div class="flex justify-center space-x-6 mb-4">
-      <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">
-        <i class="fab fa-twitter fa-2x"></i>
-      </a>
-      <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">
-        <i class="fab fa-instagram fa-2x"></i>
-      </a>
-      <a href="#" class="text-gray-400 hover:text-yellow-500 transition duration-300">
-        <i class="fab fa-facebook fa-2x"></i>
-      </a>
+
+  <!-- Footer -->
+  <footer class="py-8 bg-gray-900 text-center">
+    <div class="container mx-auto">
+      <p class="text-gray-400 mb-4">&copy; 2025 Game Store. All rights reserved.</p>
     </div>
-    <div class="text-gray-500 text-sm">
-      <p>Follow us on social media for the latest updates and offers!</p>
+  </footer>
+
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-gray-800 text-white p-6 rounded-lg shadow-lg w-96">
+      <h2 class="text-2xl font-bold mb-4">Confirm Purchase</h2>
+      <p id="totalPriceText" class="text-lg mb-6">Your total is $0.00</p>
+      <div class="flex justify-end space-x-4">
+        <button id="cancelCheckout" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">Cancel</button>
+        <button id="confirmCheckout" class="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500">Confirm</button>
+      </div>
     </div>
   </div>
-</footer>
 
-  <script>
-    // Function to load the cart from localStorage and display it
-    function loadCart() {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const cartItemsContainer = document.getElementById('cart-items');
-      const totalPriceElement = document.getElementById('total-price');
-      
-      cartItemsContainer.innerHTML = ''; // Clear the table body first
-      let totalPrice = 0;
-
-      cart.forEach((item, index) => {
-        totalPrice += item.price * item.quantity;
-        const row = document.createElement('tr');
-        row.classList.add('border-b', 'border-gray-700');
-        
-        row.innerHTML = `
-          <td class="p-4 flex items-center text-white">
-            <img src="${item.image}" alt="${item.name}" class="w-12 h-12 mr-4 rounded">
-            ${item.name}
-          </td>
-          <td class="p-4">$${item.price.toFixed(2)}</td>
-          <td class="p-4">
-            <input type="number" value="${item.quantity}" min="1" class="w-16 bg-gray-900 border border-gray-700 text-center text-white rounded" onchange="updateQuantity(${index}, this)">
-          </td>
-          <td class="p-4">$${(item.price * item.quantity).toFixed(2)}</td>
-          <td class="p-4">
-            <button onclick="removeItem(${index})" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-              <i class="fas fa-trash-alt"></i> Remove
-            </button>
-          </td>
-        `;
-        
-        cartItemsContainer.appendChild(row);
-      });
-
-      totalPriceElement.textContent = `Total: $${totalPrice.toFixed(2)}`;
-    }
-
-    // Function to update the quantity of an item in the cart
-    function updateQuantity(index, input) {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      cart[index].quantity = parseInt(input.value);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      loadCart(); // Re-load the cart with updated data
-    }
-
-    // Function to remove an item from the cart
-    function removeItem(index) {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      cart.splice(index, 1); // Remove the item at the specified index
-      localStorage.setItem('cart', JSON.stringify(cart));
-      loadCart(); // Re-load the cart after removing the item
-    }
-
-    // Load cart items when the page loads
-    window.onload = loadCart;
-    const menuToggle = document.getElementById("menu-toggle");
-    const mobileMenu = document.getElementById("mobile-menu");
-  
-    menuToggle.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-    });
-  </script>
-
-  <script>
-    firebase.auth().onAuthStateChanged((user) => {
-      const authButton = document.getElementById('authButton');
-      if (user) {
-        authButton.innerHTML = `<a href='profile.html' class='hover:text-yellow-300'><i class='fas fa-user'></i> Profile</a>`;
-      } else {
-        authButton.innerHTML = `<a href='login.html' class='hover:text-yellow-300'><i class='fas fa-user'></i> Login</a>`;
-      }
-    });
-  </script>
-
+  <!-- Scripts -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const authButton = document.getElementById('authButton');
-      if (authButton) {
-        authButton.remove();
+      const currentUser = localStorage.getItem('currentUser');
+
+      if (!currentUser) {
+        alert('You need to log in to view your cart.');
+        window.location.href = 'login.html';
+        return;
       }
+
+      const userData = JSON.parse(currentUser);
+      const userId = userData.id;
+      const cart = JSON.parse(localStorage.getItem(`cart_${userId}`)) || {};
+
+      console.log('Cart Data:', cart); // Debugging: Log the cart data
+
+      const cartItemsContainer = document.getElementById('cartItems');
+      const emptyCartMessage = document.getElementById('emptyCartMessage');
+
+      if (Object.keys(cart).length === 0) {
+        emptyCartMessage.classList.remove('hidden');
+        return;
+      }
+
+      emptyCartMessage.classList.add('hidden');
+
+      Object.values(cart).forEach(item => {
+        const price = parseFloat(item.price); // Ensure price is a number
+
+        const cartItem = document.createElement('div');
+        cartItem.className = 'flex items-center bg-gray-800 p-4 rounded-lg shadow-md';
+
+        cartItem.innerHTML = `
+          <img src="g${item.gameId}.jpg" alt="Game Image" class="w-16 h-16 object-cover rounded-lg mr-4">
+          <div class="flex-1">
+            <h3 class="text-lg font-bold text-yellow-400">${item.gameName}</h3>
+            <p class="text-gray-300">Price: $${price.toFixed(2)}</p>
+            <div class="flex items-center mt-2">
+              <label for="quantity-${item.gameId}" class="mr-2 text-gray-300">Quantity:</label>
+              <input type="number" id="quantity-${item.gameId}" class="w-16 p-1 bg-gray-700 text-white rounded" value="${item.quantity}" min="1">
+            </div>
+          </div>
+          <button class="ml-4 text-red-500 hover:text-red-700" onclick="removeFromCart(${item.gameId})">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        `;
+
+        const quantityInput = cartItem.querySelector(`#quantity-${item.gameId}`);
+        quantityInput.addEventListener('change', (e) => {
+          const newQuantity = parseInt(e.target.value, 10);
+          if (newQuantity > 0) {
+            cart[item.gameId].quantity = newQuantity;
+            localStorage.setItem(`cart_${userId}`, JSON.stringify(cart));
+          } else {
+            e.target.value = cart[item.gameId].quantity;
+          }
+        });
+
+        cartItemsContainer.appendChild(cartItem);
+      });
+    });
+
+    function logout() {
+      localStorage.removeItem('currentUser');
+      location.reload();
+    }
+
+    function removeFromCart(gameId) {
+      const currentUser = localStorage.getItem('currentUser');
+      if (!currentUser) return;
+
+      const userData = JSON.parse(currentUser);
+      const userId = userData.id;
+      const cart = JSON.parse(localStorage.getItem(`cart_${userId}`)) || {};
+
+      delete cart[gameId];
+      localStorage.setItem(`cart_${userId}`, JSON.stringify(cart));
+
+      location.reload();
+    }
+
+    const checkoutButton = document.getElementById('checkoutButton');
+    const checkoutModal = document.getElementById('checkoutModal');
+    const totalPriceText = document.getElementById('totalPriceText');
+    const cancelCheckout = document.getElementById('cancelCheckout');
+    const confirmCheckout = document.getElementById('confirmCheckout');
+
+    checkoutButton.addEventListener('click', () => {
+      const currentUser = localStorage.getItem('currentUser');
+      if (!currentUser) {
+        alert('You need to log in to proceed with checkout.');
+        return;
+      }
+
+      const userData = JSON.parse(currentUser);
+      const userId = userData.id;
+      const cart = JSON.parse(localStorage.getItem(`cart_${userId}`)) || {};
+
+      if (Object.keys(cart).length === 0) {
+        alert('Your cart is empty.');
+        return;
+      }
+
+      // Calculate total price
+      let totalPrice = 0;
+      Object.values(cart).forEach(item => {
+        totalPrice += item.quantity * item.price; // Use the price from the cart
+      });
+
+      // Show the modal with the total price
+      totalPriceText.textContent = `Your total is $${totalPrice.toFixed(2)}`;
+      checkoutModal.classList.remove('hidden');
+    });
+
+    cancelCheckout.addEventListener('click', () => {
+      checkoutModal.classList.add('hidden');
+    });
+
+    confirmCheckout.addEventListener('click', () => {
+      const currentUser = localStorage.getItem('currentUser');
+      if (!currentUser) return;
+
+      const userData = JSON.parse(currentUser);
+      const userId = userData.id;
+
+      // Clear the cart
+      localStorage.removeItem(`cart_${userId}`);
+
+      // Hide the modal
+      checkoutModal.classList.add('hidden');
+
+      // Show thank-you message
+      alert('Thank you for your purchase!');
+
+      // Reload the page to reflect the empty cart
+      location.reload();
     });
   </script>
-
 </body>
 </html>

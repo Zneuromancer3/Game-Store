@@ -6,9 +6,6 @@
     <title>Game Store - Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -62,50 +59,56 @@
                     </div>
                 </div>
 
-                <!-- Cart Section -->
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold text-yellow-400 mb-4">Your Cart</h3>
-                    <div id="cartItems" class="space-y-4">
-                        <!-- Cart items will be dynamically added here -->
-                    </div>
-                    <div class="mt-4 flex justify-between items-center">
-                        <span class="text-lg font-semibold">Total: $<span id="cartTotal">0.00</span></span>
-                        <button id="checkoutButton" class="px-4 py-2 bg-yellow-500 text-black rounded-lg hover:bg-yellow-600">
-                            Checkout
-                        </button>
-                    </div>
-                </div>
-
                 <!-- Admin Dashboard -->
-                <div class="mb-8">
+                <div id="adminDashboard" class="mb-8">
                     <h3 class="text-xl font-semibold text-yellow-400 mb-4">Admin Dashboard</h3>
                     <div class="space-y-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="bg-gray-800 p-4 rounded-lg">
-                                <h4 class="text-lg font-semibold text-yellow-400 mb-2">User Management</h4>
-                                <div class="space-y-2">
-                                    <input type="email" id="userEmailInput" placeholder="User Email"
-                                        class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white">
-                                    <button id="grantAdminButton" class="w-full px-4 py-2 bg-yellow-500 text-black rounded-lg hover:bg-yellow-600">
-                                        Grant Admin Access
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="bg-gray-800 p-4 rounded-lg">
-                                <h4 class="text-lg font-semibold text-yellow-400 mb-2">Game Management</h4>
-                                <div class="space-y-2">
-                                    <button id="addGameButton" class="w-full px-4 py-2 bg-yellow-500 text-black rounded-lg hover:bg-yellow-600">
-                                        Add New Game
-                                    </button>
-                                    <button id="manageGamesButton" class="w-full px-4 py-2 bg-yellow-500 text-black rounded-lg hover:bg-yellow-600">
-                                        Manage Existing Games
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- Removed the unnecessary Game Management buttons section. -->
                     </div>
                 </div>
-
+                <section id="manageGames" class="py-12">
+                    <div class="container mx-auto">
+                        <h2 class="text-3xl font-bold text-yellow-400 mb-6">Manage Games</h2>
+                        <div class="mb-4">
+                            <h3 class="text-xl font-semibold text-yellow-300">Add New Game</h3>
+                            <form id="addGameForm" class="bg-gray-800 p-4 rounded-lg">
+                                <div class="mb-4">
+                                    <label for="gameName" class="block text-sm font-bold mb-2">Game Name</label>
+                                    <input type="text" id="gameName" class="w-full px-3 py-2 bg-gray-900 text-white rounded" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="gamePrice" class="block text-sm font-bold mb-2">Price</label>
+                                    <input type="number" id="gamePrice" step="0.01" class="w-full px-3 py-2 bg-gray-900 text-white rounded" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="gameImage" class="block text-sm font-bold mb-2">Image URL</label>
+                                    <input type="text" id="gameImage" class="w-full px-3 py-2 bg-gray-900 text-white rounded" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="gameDescription" class="block text-sm font-bold mb-2">Description</label>
+                                    <textarea id="gameDescription" class="w-full px-3 py-2 bg-gray-900 text-white rounded" rows="3" required></textarea>
+                                </div>
+                                <button type="submit" class="bg-yellow-500 text-black px-4 py-2 rounded hover:bg-yellow-600">Add Game</button>
+                            </form>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-yellow-300">Existing Games</h3>
+                            <table class="table-auto w-full text-left bg-gray-800 rounded">
+                                <thead>
+                                    <tr class="border-b border-gray-700">
+                                        <th class="p-4 text-yellow">Game</th>
+                                        <th class="p-4 text-yellow">Price</th>
+                                        <th class="p-4 text-yellow">Description</th>
+                                        <th class="p-4 text-yellow">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="gameList">
+                                    <!-- Games will be dynamically added here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
                 <!-- Logout Button -->
                 <div class="mt-8">
                     <button id="logoutButton" class="w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
@@ -116,125 +119,254 @@
         </div>
     </div>
 
+    <!-- Purchased Games Section -->
+    <div id="purchasedGamesSection" class="mt-8">
+        <h3 class="text-xl font-semibold text-yellow-400 mb-4">Purchased Games</h3>
+        <div id="purchasedGames" class="space-y-4">
+            <!-- Purchased games will be dynamically added here -->
+        </div>
+    </div>
+
     <script>
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyA0YRgZSh9RL1AN19DRXVFFayUuEwAUgfI",
-            authDomain: "gamestore-220f3.firebaseapp.com",
-            projectId: "gamestore-220f3",
-            storageBucket: "gamestore-220f3.firebasestorage.app",
-            messagingSenderId: "623697954306",
-            appId: "1:623697954306:web:25954c14bc49bf34bdc91b"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
-        // Sample cart data (in a real app, this would come from Firestore)
-        const cartItems = [
-            { id: 1, name: 'Red Dead Redemption 2', price: 59.99, image: 'game1.jpg' },
-            { id: 2, name: 'Cyberpunk 2077', price: 49.99, image: 'game2.jpg' }
-        ];
-
-        // Function to update cart display
-        function updateCartDisplay() {
-            const cartItemsContainer = document.getElementById('cartItems');
-            const cartTotal = document.getElementById('cartTotal');
-            
-            // Clear existing items
-            cartItemsContainer.innerHTML = '';
-            
-            // Calculate total
-            let total = 0;
-            
-            // Add each item to the cart
-            cartItems.forEach(item => {
-                total += item.price;
-                const cartItem = document.createElement('div');
-                cartItem.className = 'cart-item bg-gray-800 p-4 rounded-lg flex items-center space-x-4';
-                cartItem.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded">
-                    <div class="flex-1">
-                        <h4 class="text-lg font-semibold">${item.name}</h4>
-                        <p class="text-yellow-400">$${item.price.toFixed(2)}</p>
-                    </div>
-                    <button class="remove-item px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600" data-id="${item.id}">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                `;
-                cartItemsContainer.appendChild(cartItem);
-            });
-            
-            // Update total
-            cartTotal.textContent = total.toFixed(2);
+        // Load profile information
+        function loadProfile() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                const userData = JSON.parse(currentUser);
+                document.getElementById('userEmail').textContent = userData.username;
+            } else {
+                window.location.href = 'login.html';
+            }
         }
 
-        // Check authentication state
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                // Update profile information
-                document.getElementById('userEmail').textContent = user.email;
-                
-                // Update cart display
-                updateCartDisplay();
-            } else {
-                // Redirect to home page if not logged in
-                window.location.href = 'index.html';
-            }
-        });
+        loadProfile();
 
         // Logout functionality
         document.getElementById('logoutButton').addEventListener('click', () => {
-            firebase.auth().signOut().then(() => {
-                localStorage.removeItem('currentUser');
-                window.location.href = 'index.html';
-            });
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
         });
 
-        // Admin functionality
-        document.getElementById('grantAdminButton').addEventListener('click', () => {
-            const userEmail = document.getElementById('userEmailInput').value;
-            if (userEmail) {
-                // In a real app, this would update the user's admin status in Firestore
-                alert(`Admin access granted to ${userEmail}`);
-                document.getElementById('userEmailInput').value = '';
-            } else {
-                alert('Please enter a user email');
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+            if (currentUser) {
+                // Show admin-specific elements if the user is an admin
+                if (currentUser.isAdmin) {
+                    document.getElementById('adminBadge').style.display = 'inline';
+                    document.getElementById('userRole').textContent = 'Administrator Account';
+                    document.getElementById('adminDashboard').style.display = 'block';
+
+                    // Remove cart button for admin users
+                    const cartButton = document.getElementById('cartButton');
+                    if (cartButton) {
+                        cartButton.remove();
+                    }
+                } else {
+                    // Hide admin-specific elements for non-admin users
+                    document.getElementById('adminBadge').style.display = 'none';
+                    document.getElementById('userRole').textContent = 'Standard User Account';
+                    document.getElementById('adminDashboard').style.display = 'none';
+                }
             }
         });
 
-        document.getElementById('addGameButton').addEventListener('click', () => {
-            // In a real app, this would open a form to add a new game
-            alert('Add Game functionality will be implemented here');
-        });
+        // Ensure DOM elements exist before adding event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            const addGameForm = document.getElementById('addGameForm');
+            const gameList = document.getElementById('gameList');
+            const editModal = document.createElement('div');
+            editModal.id = 'editModal';
+            editModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden';
+            editModal.innerHTML = `
+                <div class="bg-gray-800 p-6 rounded-lg w-96">
+                    <h2 class="text-xl font-bold text-yellow-400 mb-4">Edit Game</h2>
+                    <form id="editGameForm">
+                        <div class="mb-4">
+                            <label for="editGameName" class="block text-sm font-bold mb-2">Game Name</label>
+                            <input type="text" id="editGameName" class="w-full px-3 py-2 bg-gray-900 text-white rounded" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="editGameImage" class="block text-sm font-bold mb-2">Image URL</label>
+                            <input type="text" id="editGameImage" class="w-full px-3 py-2 bg-gray-900 text-white rounded" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="editGamePrice" class="block text-sm font-bold mb-2">Price</label>
+                            <input type="number" id="editGamePrice" step="0.01" class="w-full px-3 py-2 bg-gray-900 text-white rounded" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="editGameDescription" class="block text-sm font-bold mb-2">Description</label>
+                            <textarea id="editGameDescription" class="w-full px-3 py-2 bg-gray-900 text-white rounded" rows="3" required></textarea>
+                        </div>
+                        <div class="flex justify-end space-x-4">
+                            <button type="button" id="cancelEdit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Cancel</button>
+                            <button type="submit" class="px-4 py-2 bg-yellow-500 text-black rounded hover:bg-yellow-600">Save</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(editModal);
 
-        document.getElementById('manageGamesButton').addEventListener('click', () => {
-            // In a real app, this would show a list of games to manage
-            alert('Manage Games functionality will be implemented here');
-        });
+            let currentEditId = null;
 
-        // Checkout functionality
-        document.getElementById('checkoutButton').addEventListener('click', () => {
-            if (cartItems.length === 0) {
-                alert('Your cart is empty!');
-                return;
+            if (addGameForm) {
+                // Add a new game
+                addGameForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('gameName').value;
+                    const price = document.getElementById('gamePrice').value;
+                    const image = document.getElementById('gameImage').value;
+                    const description = document.getElementById('gameDescription').value;
+
+                    fetch('add_game.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, price, image, description })
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            alert(data);
+                            loadGames();
+                        });
+                });
             }
-            // In a real app, this would process the payment
-            alert('Checkout functionality will be implemented here');
+
+            if (gameList) {
+                // Load games from the server
+                function loadGames() {
+                    fetch('get_games.php')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            gameList.innerHTML = '';
+                            if (data.length === 0) {
+                                gameList.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-gray-400">No games available</td></tr>';
+                            } else {
+                                data.forEach(game => {
+                                    const row = document.createElement('tr');
+                                    row.classList.add('border-b', 'border-gray-700');
+                                    row.innerHTML = `
+                                        <td class="p-4 text-white flex items-center space-x-4">
+                                            <img src="${game.image_url}" alt="${game.name}" class="w-12 h-12 object-cover rounded">
+                                            <span>${game.name}</span>
+                                        </td>
+                                        <td class="p-4 text-white">$${game.price}</td>
+                                        <td class="p-4 text-white">${game.description}</td>
+                                        <td class="p-4 flex space-x-2">
+                                            <button onclick="openEditModal(${game.id}, '${game.name}', '${game.image_url}', ${game.price}, '${game.description}')" class="bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600">
+                                                <i class="fas fa-pen"></i>
+                                            </button>
+                                            <button onclick="deleteGame(${game.id})" class="bg-red-500 text-white px-3 py-2 rounded hover:bg-red-600">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    `;
+                                    gameList.appendChild(row);
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error loading games:', error);
+                            gameList.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-red-500">Failed to load games</td></tr>';
+                        });
+                }
+
+                // Open edit modal
+                window.openEditModal = function (id, name, imageUrl, price, description) {
+                    currentEditId = id;
+                    document.getElementById('editGameName').value = name;
+                    document.getElementById('editGameImage').value = imageUrl;
+                    document.getElementById('editGamePrice').value = price;
+                    document.getElementById('editGameDescription').value = description;
+                    editModal.classList.remove('hidden');
+                };
+
+                // Close edit modal
+                document.getElementById('cancelEdit').addEventListener('click', () => {
+                    editModal.classList.add('hidden');
+                });
+
+                // Save changes
+                document.getElementById('editGameForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('editGameName').value;
+                    const imageUrl = document.getElementById('editGameImage').value;
+                    const price = document.getElementById('editGamePrice').value;
+                    const description = document.getElementById('editGameDescription').value;
+
+                    fetch('update_game.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id: currentEditId, name, image_url: imageUrl, price, description })
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            alert(data);
+                            editModal.classList.add('hidden');
+                            loadGames();
+                        })
+                        .catch(error => console.error('Error updating game:', error));
+                });
+
+                // Delete a game
+                window.deleteGame = function (id) {
+                    fetch(`delete_game.php?id=${id}`, { method: 'GET' })
+                        .then(response => response.text())
+                        .then(data => {
+                            alert(data);
+                            loadGames();
+                        })
+                        .catch(error => console.error('Error deleting game:', error));
+                };
+
+                // Add to cart functionality
+                window.addToCart = function (gameId) {
+                    const userId = localStorage.getItem('userId');
+
+                    if (!userId) {
+                        alert('You must be logged in to add items to the cart.');
+                        return;
+                    }
+
+                    fetch('add_to_cart.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ user_id: userId, game_id: gameId })
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            alert(data);
+                        })
+                        .catch(error => console.error('Error adding to cart:', error));
+                };
+
+                loadGames();
+            }
         });
 
-        // Remove item from cart
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('.remove-item')) {
-                const itemId = parseInt(e.target.closest('.remove-item').dataset.id);
-                const index = cartItems.findIndex(item => item.id === itemId);
-                if (index !== -1) {
-                    cartItems.splice(index, 1);
-                    updateCartDisplay();
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+            if (currentUser) {
+                // Show admin-specific elements if the user is an admin
+                if (currentUser.isAdmin) {
+                    document.getElementById('adminBadge').style.display = 'inline';
+                    document.getElementById('userRole').textContent = 'Administrator Account';
+                    document.getElementById('adminDashboard').style.display = 'block';
+                    document.getElementById('manageGames').style.display = 'block';
+                } else {
+                    // Hide admin-specific elements for non-admin users
+                    document.getElementById('adminBadge').style.display = 'none';
+                    document.getElementById('userRole').textContent = 'Standard User Account';
+                    document.getElementById('adminDashboard').style.display = 'none';
+                    document.getElementById('manageGames').style.display = 'none';
                 }
             }
         });
     </script>
 </body>
-</html> 
+</html>
