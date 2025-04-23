@@ -109,6 +109,12 @@
                         </div>
                     </div>
                 </section>
+                <div id="adminFeedback" class="mb-8">
+                    <h3 class="text-xl font-semibold text-yellow-400 mb-4">Feedback</h3>
+                    <div id="feedbackList" class="space-y-4">
+                        <!-- Feedback will be dynamically added here -->
+                    </div>
+                </div>
                 <!-- Logout Button -->
                 <div class="mt-8">
                     <button id="logoutButton" class="w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
@@ -119,13 +125,7 @@
         </div>
     </div>
 
-    <!-- Purchased Games Section -->
-    <div id="purchasedGamesSection" class="mt-8">
-        <h3 class="text-xl font-semibold text-yellow-400 mb-4">Purchased Games</h3>
-        <div id="purchasedGames" class="space-y-4">
-            <!-- Purchased games will be dynamically added here -->
-        </div>
-    </div>
+
 
     <script>
         // Load profile information
@@ -365,6 +365,36 @@
                     document.getElementById('adminDashboard').style.display = 'none';
                     document.getElementById('manageGames').style.display = 'none';
                 }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+            if (currentUser && currentUser.isAdmin) {
+                fetch('get_feedback.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        const feedbackList = document.getElementById('feedbackList');
+                        feedbackList.innerHTML = '';
+
+                        if (data.length === 0) {
+                            feedbackList.innerHTML = '<p class="text-gray-400">No feedback available.</p>';
+                        } else {
+                            data.forEach(feedback => {
+                                const feedbackItem = document.createElement('div');
+                                feedbackItem.className = 'bg-gray-800 p-4 rounded-lg';
+                                feedbackItem.innerHTML = `
+                                    <p><strong>Name:</strong> ${feedback.name}</p>
+                                    <p><strong>Email:</strong> ${feedback.email}</p>
+                                    <p><strong>Message:</strong> ${feedback.message}</p>
+                                    <p class="text-sm text-gray-500">Submitted at: ${feedback.submitted_at}</p>
+                                `;
+                                feedbackList.appendChild(feedbackItem);
+                            });
+                        }
+                    })
+                    .catch(error => console.error('Error fetching feedback:', error));
             }
         });
     </script>
