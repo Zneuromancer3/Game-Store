@@ -358,12 +358,14 @@
                     document.getElementById('userRole').textContent = 'Administrator Account';
                     document.getElementById('adminDashboard').style.display = 'block';
                     document.getElementById('manageGames').style.display = 'block';
+                    document.getElementById('adminFeedback').style.display = 'block';
                 } else {
                     // Hide admin-specific elements for non-admin users
                     document.getElementById('adminBadge').style.display = 'none';
                     document.getElementById('userRole').textContent = 'Standard User Account';
                     document.getElementById('adminDashboard').style.display = 'none';
                     document.getElementById('manageGames').style.display = 'none';
+                    document.getElementById('adminFeedback').style.display = 'none';
                 }
             }
         });
